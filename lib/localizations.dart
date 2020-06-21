@@ -83,26 +83,3 @@ class _AppLocalizationsDelegate
   @override
   bool shouldReload(_AppLocalizationsDelegate old) => false;
 }
-
-/*
-class AppLanguage extends ChangeNotifier {
-  Locale _appLocale = Locale('en');
-
-  Locale get appLocale => _appLocale ?? Locale("en");
-  fetchLocale() async {
-    if (settings.locale == null) {
-      _appLocale = Locale('en');
-    }
-    _appLocale = settings.locale;
-  }
-
-  void changeLanguage(Locale locale) {
-    if (_appLocale == locale) {
-      return;
-    }
-    settings.locale = locale;
-    settings.save();
-    notifyListeners();
-  }
-}
-*/
