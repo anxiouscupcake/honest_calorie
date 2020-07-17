@@ -80,9 +80,9 @@ class _ProductDBState extends State<ProductDBScreen> {
               : null,
           actions: <Widget>[
             IconButton(
-                icon: Icon(Icons.filter_list),
+                icon: Icon(Icons.camera_alt),
                 onPressed: () {
-                  // TODO: implement filters
+                  // TODO: implement barcode scanner
                 }),
           ],
         ),

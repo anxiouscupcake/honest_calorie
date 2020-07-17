@@ -1,17 +1,17 @@
 // Copyright (C) 2020 Roman Zubin
-// 
+//
 // This file is part of Honest Calorie.
-// 
+//
 // Honest Calorie is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
-// 
+//
 // Honest Calorie is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
-// 
+//
 // You should have received a copy of the GNU General Public License
 // along with Honest Calorie.  If not, see <http://www.gnu.org/licenses/>.
 
@@ -115,6 +115,13 @@ class _ProductDBEditState extends State<ProductDBEdit> {
         // TODO: сделать валидацию данных и обязательные поля
         body: ListView(
           children: <Widget>[
+            FlatButton(
+              child: Text("Scan a barcode"),
+              color: Colors.green[100],
+              onPressed: () {
+                // TODO: implement barcode scanner
+              },
+            ),
             Container(
               padding: EdgeInsets.only(left: 10, right: 10),
               child: Column(
