@@ -1,17 +1,17 @@
 // Copyright (C) 2020 Roman Zubin
-// 
+//
 // This file is part of Honest Calorie.
-// 
+//
 // Honest Calorie is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
-// 
+//
 // Honest Calorie is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
-// 
+//
 // You should have received a copy of the GNU General Public License
 // along with Honest Calorie.  If not, see <http://www.gnu.org/licenses/>.
 
@@ -25,7 +25,8 @@ class ProfileEditScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(AppLocalizations.of(context).translate("edit_profile_data")),
+        title:
+            Text(AppLocalizations.of(context).translate("edit_profile_data")),
         leading: IconButton(
           icon: Icon(Icons.close),
           onPressed: () {
@@ -46,6 +47,21 @@ class ProfileEditScreen extends StatelessWidget {
       // TODO: сделать валидацию данных
       body: ListView(
         children: <Widget>[
+          Container(
+            padding: EdgeInsets.all(16),
+            child: Center(
+              child: CircleAvatar(
+                backgroundImage:
+                    NetworkImage("https://i.imgur.com/vM4jpQH.png"),
+                maxRadius: 80,
+              ),
+            ),
+          ),
+          // TODO: implement image selection
+          FlatButton(
+            child: Text("Select image"),
+            onPressed: () {},
+          ),
           Container(
             padding: EdgeInsets.only(left: 10, right: 10),
             child: Column(
@@ -71,20 +87,6 @@ class ProfileEditScreen extends StatelessWidget {
                     user.gender = value;
                   },
                 ),
-                /*
-                DropdownButton(
-                  
-                  items: <String>["Male", "Female"].map<DropdownMenuItem<String>>((String value) {
-                    return DropdownMenuItem<String>(
-                      value: value,
-                      child: Text(value),
-                    );
-                  }),
-                  onChanged: (String value) {
-
-                  },
-                ),
-                */
                 // TODO: спрашивать дату рождения, а не возраст
                 TextField(
                   keyboardType: TextInputType.number,

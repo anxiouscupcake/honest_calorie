@@ -1,22 +1,23 @@
 // Copyright (C) 2020 Roman Zubin
-// 
+//
 // This file is part of Honest Calorie.
-// 
+//
 // Honest Calorie is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
-// 
+//
 // Honest Calorie is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
-// 
+//
 // You should have received a copy of the GNU General Public License
 // along with Honest Calorie.  If not, see <http://www.gnu.org/licenses/>.
 
 import 'package:flutter/material.dart';
 import 'package:nutrition_tracker/localizations.dart';
+import 'package:nutrition_tracker/screens/forms/profile_edit_screen.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:nutrition_tracker/main.dart';
 import 'package:nutrition_tracker/routes.dart';
@@ -81,8 +82,34 @@ class AppDrawer extends StatelessWidget {
       child: ListView(
         children: <Widget>[
           DrawerHeader(
-            child: Text("Nutrition Tracker"),
-            decoration: BoxDecoration(color: Colors.greenAccent),
+            child: Container(
+              //alignment: Alignment.bottomLeft,
+              child: Column(
+                children: <Widget>[
+                  Container(
+                    alignment: Alignment.bottomLeft,
+                    margin: EdgeInsets.only(left: 10),
+                    child: CircleAvatar(
+                      backgroundImage:
+                          NetworkImage("https://i.imgur.com/vM4jpQH.png"),
+                      radius: 32,
+                    ),
+                  ),
+                  ListTile(
+                    title: Text("Jopa"),
+                    subtitle: Text("63kg, BMI: 228"),
+                    trailing: Icon(Icons.edit),
+                    onTap: () {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => ProfileEditScreen()));
+                    },
+                  ),
+                ],
+              ),
+            ),
+            decoration: BoxDecoration(color: Colors.green[100]),
           ),
           ListTile(
               selected: currentScreen == "journal",
@@ -102,7 +129,6 @@ class AppDrawer extends StatelessWidget {
                     arguments: ProductDBScreenArguments(false));
                 currentScreen = "products";
               }),
-              /*
           ListTile(
               selected: currentScreen == "statistics",
 
@@ -114,7 +140,6 @@ class AppDrawer extends StatelessWidget {
                 Navigator.pushReplacementNamed(context, Routes.statistics);
                 currentScreen = "statistics";
               }),
-              */
           Divider(),
           ListTile(
               selected: currentScreen == "settings",
@@ -133,7 +158,8 @@ class AppDrawer extends StatelessWidget {
             ),
           if (settings.showFeedback)
             ListTile(
-              title: Text(AppLocalizations.of(context).translate("give_feedback")),
+              title:
+                  Text(AppLocalizations.of(context).translate("give_feedback")),
               leading: Icon(Icons.bug_report),
               onTap: () =>
                   _goToURL(context, "https://forms.gle/FNS8j6boTuAn7usn6"),

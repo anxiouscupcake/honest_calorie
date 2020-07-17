@@ -25,10 +25,12 @@ class User {
 
   String name = "";
   String gender = "";
+  // TODO: change to birth date
   int age = 0;
   double weight = 0.0; // kg
   double height = 0.0; // cm
 
+  // TODO: убрать запись пустых полей
   User.fromJson(Map<String, dynamic> json)
       : name = json['name'],
         gender = json['gender'],
