@@ -17,10 +17,32 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:intl/intl.dart';
 import 'package:nutrition_tracker/localizations.dart';
 import 'package:nutrition_tracker/main.dart';
 
-class ProfileEditScreen extends StatelessWidget {
+class ProfileEdit extends StatefulWidget {
+  ProfileEdit({Key key}) : super(key: key);
+
+  @override
+  _ProfileEditState createState() => _ProfileEditState();
+}
+
+class _ProfileEditState extends State<ProfileEdit> {
+  _pickDate(BuildContext context) async {
+    final picked = await showDatePicker(
+      context: context,
+      initialDate: user.birthday == null ? DateTime(2000, 1, 1) : user.birthday,
+      firstDate: DateTime(1900, 1),
+      lastDate: DateTime(3000),
+    );
+    if (picked != null && picked != user.birthday) {
+      setState(() {
+        user.birthday = picked;
+      });
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -90,14 +112,18 @@ class ProfileEditScreen extends StatelessWidget {
                 // TODO: спрашивать дату рождения, а не возраст
                 TextField(
                   keyboardType: TextInputType.number,
+                  readOnly: true,
                   controller: TextEditingController(
-                      text: user.age == 0 ? "" : user.age.toString()),
+                    
+                      // TODO: localization
+                      text: user.birthday == null
+                          ? "Tap to select your birth date"
+                          : new DateFormat.yMMMMd().format(user.birthday)),
                   decoration: const InputDecoration(
                     icon: Icon(Icons.cake),
-                    labelText: "Age (will be changed to birth date)",
                   ),
-                  onChanged: (String value) {
-                    user.age = int.tryParse(value);
+                  onTap: () {
+                    _pickDate(context);
                   },
                 ),
                 TextField(

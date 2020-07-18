@@ -69,7 +69,7 @@ class SettingsScreenState extends State<SettingsScreen> {
               subtitle: Text(AppLocalizations.of(context)
                   .translate("edit_profile_data_sub")),
               onTap: () => Navigator.push(context,
-                  MaterialPageRoute(builder: (context) => ProfileEditScreen())),
+                  MaterialPageRoute(builder: (context) => ProfileEdit())),
             ),
             /*
             SwitchListTile(
