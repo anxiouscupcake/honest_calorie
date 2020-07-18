@@ -20,6 +20,7 @@ import 'package:flutter/services.dart';
 import 'package:intl/intl.dart';
 import 'package:nutrition_tracker/localizations.dart';
 import 'package:nutrition_tracker/main.dart';
+import 'package:nutrition_tracker/widgets/category_selector.dart';
 
 class ProfileEdit extends StatefulWidget {
   ProfileEdit({Key key}) : super(key: key);
@@ -40,6 +41,23 @@ class _ProfileEditState extends State<ProfileEdit> {
       setState(() {
         user.birthday = picked;
       });
+    }
+  }
+
+  _pickGender(BuildContext context) async {
+    List<String> categoryKeys = ["male", "female"];
+    final picked = await Navigator.push(
+      context,
+      MaterialPageRoute(
+          builder: (context) => CategorySelector(
+                // TODO: localiztaion
+                titleKey: "pick_gender",
+                categoryKeys: categoryKeys,
+              )),
+    );
+    if (picked != null) {
+      user.gender = picked;
+      setState(() {});
     }
   }
 
@@ -99,22 +117,22 @@ class _ProfileEditState extends State<ProfileEdit> {
                     user.name = value;
                   },
                 ),
-                // TODO: implement male/female dropdown
+                // TODO: localization
                 TextField(
+                  readOnly: true,
                   controller: TextEditingController(text: user.gender),
                   decoration: const InputDecoration(
-                    labelText: "Gender (dropdown will be implemented)",
+                    icon: Icon(Icons.person),
+                    labelText: "Tap to select your gender",
                   ),
-                  onChanged: (String value) {
-                    user.gender = value;
+                  onTap: () {
+                    _pickGender(context);
                   },
                 ),
                 // TODO: спрашивать дату рождения, а не возраст
                 TextField(
-                  keyboardType: TextInputType.number,
                   readOnly: true,
                   controller: TextEditingController(
-                    
                       // TODO: localization
                       text: user.birthday == null
                           ? "Tap to select your birth date"
@@ -135,7 +153,10 @@ class _ProfileEditState extends State<ProfileEdit> {
                       labelText: "Height",
                       hintText: "Your height in centimeters"),
                   onChanged: (String value) {
-                    user.height = double.tryParse(value);
+                    if (value == "")
+                      user.height = 0;
+                    else
+                      user.height = double.tryParse(value);
                   },
                 ),
                 TextField(
@@ -147,7 +168,10 @@ class _ProfileEditState extends State<ProfileEdit> {
                       labelText: "Weight",
                       hintText: "Your weight in kilograms"),
                   onChanged: (String value) {
-                    user.weight = double.tryParse(value);
+                    if (value == "")
+                      user.weight = 0;
+                    else
+                      user.weight = double.tryParse(value);
                   },
                 ),
               ],

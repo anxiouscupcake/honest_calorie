@@ -96,8 +96,10 @@ class AppDrawer extends StatelessWidget {
                     ),
                   ),
                   ListTile(
-                    title: Text("Jopa"),
-                    subtitle: Text("63kg, BMI: 228"),
+                    // TODO: localization
+                    // TOOD: data is not updated since it's a stateless widget
+                    title: Text(user.name == "" ? "User" : user.name),
+                    subtitle: user.getSummaryData() == null ? null : Text(user.getSummaryData()),
                     trailing: Icon(Icons.edit),
                     onTap: () {
                       Navigator.push(

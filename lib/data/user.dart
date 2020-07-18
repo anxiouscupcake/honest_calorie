@@ -29,6 +29,31 @@ class User {
   double weight = 0.0; // kg
   double height = 0.0; // cm
 
+  String getSummaryData() {
+    bool isNull = true;
+    String summary = "";
+
+    if (weight > 0) {
+      summary += weight.toString() + " kg";
+      isNull = false;
+      if (height > 0) {
+        summary += ", BMI: " + getBMI().toStringAsFixed(1);
+      }
+    }
+
+    if (isNull)
+      return null;
+    else
+      return summary;
+  }
+
+  double getBMI() {
+    if (weight == 0 || height == 0)
+      return 0;
+    else
+      return weight / ((height / 100.0) * (height / 100.0));
+  }
+
   // TODO: убрать запись пустых полей
   User.fromJson(Map<String, dynamic> json) {
     name = json['name'];
@@ -82,12 +107,5 @@ class User {
     final file = await _localFile;
     debugPrint("JSON: " + json.encode(this));
     return file.writeAsString(json.encode(this));
-  }
-
-  double getBMI() {
-    if (weight == 0 || height == 0)
-      return 0;
-    else
-      return weight / ((height / 100.0) * (height / 100.0));
   }
 }
