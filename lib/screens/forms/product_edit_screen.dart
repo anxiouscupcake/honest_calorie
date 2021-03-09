@@ -15,6 +15,9 @@
 // You should have received a copy of the GNU General Public License
 // along with Honest Calorie.  If not, see <http://www.gnu.org/licenses/>.
 
+import 'package:http/http.dart' as http;
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/foundation.dart';
 import 'package:nutrition_tracker/localizations.dart';
@@ -66,6 +69,17 @@ class _ProductDBEditState extends State<ProductDBEdit> {
     }
   }
 
+  Future<String> _getData(String code) async {
+    var response = await http.get(
+        Uri.encodeFull("https://world.openfoodfacts.org/api/v0/product/" + code + ".json"),
+        headers: {"Accept": "application/json"});
+
+    setState(() {
+      var data = json.decode(response.body);
+    });
+    return "Success";
+  }
+
   @override
   Widget build(BuildContext context) {
     if (widget.isEditing && widget.index == null) {
@@ -115,11 +129,11 @@ class _ProductDBEditState extends State<ProductDBEdit> {
         // TODO: сделать валидацию данных и обязательные поля
         body: ListView(
           children: <Widget>[
-            FlatButton(
+            TextButton(
               child: Text("Scan a barcode"),
-              color: Colors.green[100],
               onPressed: () {
                 // TODO: implement barcode scanner
+                _getData("3017620422003");
               },
             ),
             Container(

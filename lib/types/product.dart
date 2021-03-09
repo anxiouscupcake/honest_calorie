@@ -24,6 +24,7 @@ class Product {
   // basic information
   /// Index of product in database.
   String name = "";
+  String code = "";
   String category = "";
   int calories = 0; // kcal
   int servingSize = 100;
@@ -55,6 +56,7 @@ class Product {
   Product.fromJson(Map<String, dynamic> json) {
     // basic information
     name = json["name"];
+    code = json["code"];
     category = json["category"];
     calories = json["calories"];
     servingSize = json["servingSize"];
