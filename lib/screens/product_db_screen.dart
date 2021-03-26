@@ -1,30 +1,30 @@
 // Copyright (C) 2021 Roman Zubin
-// 
+//
 // This file is part of Honest Calorie.
-// 
+//
 // Honest Calorie is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
-// 
+//
 // Honest Calorie is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
-// 
+//
 // You should have received a copy of the GNU General Public License
 // along with Honest Calorie.  If not, see <http://www.gnu.org/licenses/>.
 
 import 'package:flutter/material.dart';
-import 'package:nutrition_tracker/localizations.dart';
-import 'package:nutrition_tracker/types/product.dart';
-import 'package:nutrition_tracker/types/product_filter.dart';
-import 'package:nutrition_tracker/widgets/drawer.dart';
-import 'package:nutrition_tracker/screens/forms/product_edit_screen.dart';
-import 'package:nutrition_tracker/types/product_db_screen_arguments.dart';
+import 'package:honest_calorie/localizations.dart';
+import 'package:honest_calorie/types/product.dart';
+import 'package:honest_calorie/types/product_filter.dart';
+import 'package:honest_calorie/widgets/drawer.dart';
+import 'package:honest_calorie/screens/forms/product_edit_screen.dart';
+import 'package:honest_calorie/types/product_db_screen_arguments.dart';
 
-import 'package:nutrition_tracker/main.dart';
-import 'package:nutrition_tracker/widgets/no_data.dart';
+import 'package:honest_calorie/main.dart';
+import 'package:honest_calorie/widgets/no_data.dart';
 
 class ProductDBScreen extends StatefulWidget {
   static const String routeName = "/product_db";
@@ -34,20 +34,22 @@ class ProductDBScreen extends StatefulWidget {
 
 class _ProductDBState extends State<ProductDBScreen> {
   ProductFilter filter = new ProductFilter();
+  ProductDBScreenArguments args = new ProductDBScreenArguments(false);
 
   String getProductSubtitle(Product product) {
     String subtitle = product.calories.toString() +
         " " +
-        AppLocalizations.of(context).translate("kcal_per") + " " +
-        product.servingSize.toString() + " " +
+        AppLocalizations.of(context).translate("kcal_per") +
+        " " +
+        product.servingSize.toString() +
+        " " +
         product.getLocalizedUnit(context);
     return subtitle;
   }
 
   @override
   Widget build(BuildContext context) {
-    final ProductDBScreenArguments args =
-        ModalRoute.of(context).settings.arguments;
+    //final Object args = ModalRoute.of(context)!.settings.arguments!;
 
     return Scaffold(
         drawer: args.isPicker ? null : AppDrawer(),
@@ -95,7 +97,8 @@ class _ProductDBState extends State<ProductDBScreen> {
                   decoration: InputDecoration(
                     icon: Icon(Icons.search),
                     labelText: AppLocalizations.of(context).translate("search"),
-                    hintText: AppLocalizations.of(context).translate("search_hint"),
+                    hintText:
+                        AppLocalizations.of(context).translate("search_hint"),
                   ),
                   onChanged: (String value) {
                     filter.searchQuery = value;

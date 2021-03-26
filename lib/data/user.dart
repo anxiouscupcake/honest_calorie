@@ -25,11 +25,11 @@ class User {
 
   String name = "";
   String gender = "";
-  DateTime birthday;
+  DateTime birthday = DateTime.now();
   double weight = 0.0; // kg
   double height = 0.0; // cm
 
-  String getSummaryData() {
+  String? getSummaryData() {
     bool isNull = true;
     String summary = "";
 

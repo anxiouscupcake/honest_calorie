@@ -16,7 +16,7 @@
 // along with Honest Calorie.  If not, see <http://www.gnu.org/licenses/>.
 
 import 'package:flutter/cupertino.dart';
-import 'package:nutrition_tracker/localizations.dart';
+import 'package:honest_calorie/localizations.dart';
 
 class Product {
   Product();
@@ -108,23 +108,14 @@ class Product {
         "servingSize": servingSize,
         "servingUnit": servingUnit,
         // additional information
-        if (notes != "")
-          "notes": notes,
-        if (protein != 0)
-          "protein": protein,
-        if (fat != 0)
-          "fat": fat,
-        if (saturatedFat != 0)
-          "saturatedFat": saturatedFat,
-        if (carbohydrates != 0)
-          "carbohydrates": carbohydrates,
-        if (sugar != 0)
-          "sugar": sugar,
-        if (salt != 0)
-          "salt": salt,
-        if (sodium != 0)
-          "sodium": sodium,
-        if (fibre != 0)
-          "fibre": fibre,
+        if (notes != "") "notes": notes,
+        if (protein != 0) "protein": protein,
+        if (fat != 0) "fat": fat,
+        if (saturatedFat != 0) "saturatedFat": saturatedFat,
+        if (carbohydrates != 0) "carbohydrates": carbohydrates,
+        if (sugar != 0) "sugar": sugar,
+        if (salt != 0) "salt": salt,
+        if (sodium != 0) "sodium": sodium,
+        if (fibre != 0) "fibre": fibre,
       };
 }

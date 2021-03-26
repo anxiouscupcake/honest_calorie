@@ -1,17 +1,17 @@
 // Copyright (C) 2021 Roman Zubin
-// 
+//
 // This file is part of Honest Calorie.
-// 
+//
 // Honest Calorie is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
-// 
+//
 // Honest Calorie is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
-// 
+//
 // You should have received a copy of the GNU General Public License
 // along with Honest Calorie.  If not, see <http://www.gnu.org/licenses/>.
 
@@ -20,29 +20,29 @@ import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:flutter/foundation.dart';
 import 'package:intl/intl.dart';
-import 'package:nutrition_tracker/localizations.dart';
-import 'package:nutrition_tracker/main.dart';
-import 'package:nutrition_tracker/routes.dart';
-import 'package:nutrition_tracker/types/product.dart';
-import 'package:nutrition_tracker/types/product_db_screen_arguments.dart';
-import 'package:nutrition_tracker/types/journal_entry.dart';
+import 'package:honest_calorie/localizations.dart';
+import 'package:honest_calorie/main.dart';
+import 'package:honest_calorie/routes.dart';
+import 'package:honest_calorie/types/product.dart';
+import 'package:honest_calorie/types/product_db_screen_arguments.dart';
+import 'package:honest_calorie/types/journal_entry.dart';
 
-import 'package:nutrition_tracker/types/exceptions/index_is_null.dart';
-import 'package:nutrition_tracker/widgets/category_selector.dart';
+import 'package:honest_calorie/types/exceptions/index_is_null.dart';
+import 'package:honest_calorie/widgets/category_selector.dart';
+import 'package:honest_calorie/types/product.dart';
 
 class JournalEntryEdit extends StatefulWidget {
-  final JournalEntry jentry;
+  final JournalEntry? jentry;
   //final DateTime dateTime;
-  final bool isEditing;
+  final bool? isEditing;
   //final int index;
 
   const JournalEntryEdit({
-    Key key,
     @required this.jentry,
     //this.dateTime,
     @required this.isEditing,
     //this.index,
-  }) : super(key: key);
+  });
 
   @override
   _JournalEntryEditState createState() => _JournalEntryEditState();
@@ -52,13 +52,13 @@ class _JournalEntryEditState extends State<JournalEntryEdit> {
   _pickDate(BuildContext context) async {
     final picked = await showDatePicker(
       context: context,
-      initialDate: widget.jentry.dateTime,
+      initialDate: widget.jentry!.dateTime,
       firstDate: DateTime(2000, 1),
       lastDate: DateTime(3000),
     );
-    if (picked != null && picked != widget.jentry.dateTime) {
+    if (picked != null && picked != widget.jentry!.dateTime) {
       setState(() {
-        widget.jentry.dateTime = picked;
+        widget.jentry!.dateTime = picked;
       });
     }
   }
@@ -68,7 +68,7 @@ class _JournalEntryEditState extends State<JournalEntryEdit> {
         arguments: ProductDBScreenArguments(true));
     if (picked != null) {
       setState(() {
-        widget.jentry.product = picked;
+        widget.jentry!.product = picked as Product;
       });
     }
   }
@@ -84,7 +84,7 @@ class _JournalEntryEditState extends State<JournalEntryEdit> {
               )),
     );
     if (picked != null) {
-      widget.jentry.category = picked;
+      widget.jentry!.category = picked;
       lastCategory = picked;
       setState(() {});
     }
@@ -112,7 +112,7 @@ class _JournalEntryEditState extends State<JournalEntryEdit> {
 
     return Scaffold(
       appBar: AppBar(
-        title: Text(widget.isEditing
+        title: Text(widget.isEditing!
             ? AppLocalizations.of(context).translate("edit_entry")
             : AppLocalizations.of(context).translate("new_entry")),
         leading: IconButton(
@@ -122,21 +122,21 @@ class _JournalEntryEditState extends State<JournalEntryEdit> {
           },
         ),
         actions: <Widget>[
-          if (widget.isEditing)
+          if (widget.isEditing!)
             IconButton(
                 icon: Icon(Icons.delete),
                 onPressed: () {
                   // TODO: confirmation
-                  journal.removeEntry(widget.jentry);
+                  journal.removeEntry(widget.jentry!);
                   Navigator.pop(context);
                 }),
           IconButton(
             icon: Icon(Icons.check),
             onPressed: () {
-              if (widget.isEditing) {
+              if (widget.isEditing!) {
                 journal.saveDatabase();
               } else {
-                journal.addEntry(widget.jentry);
+                journal.addEntry(widget.jentry!);
               }
               Navigator.pop(context);
             },
@@ -153,7 +153,7 @@ class _JournalEntryEditState extends State<JournalEntryEdit> {
                 TextField(
                   readOnly: true,
                   controller:
-                      TextEditingController(text: widget.jentry.product.name),
+                      TextEditingController(text: widget.jentry!.product.name),
                   decoration: InputDecoration(
                     icon: Icon(Icons.fastfood),
                     labelText: AppLocalizations.of(context)
@@ -166,24 +166,25 @@ class _JournalEntryEditState extends State<JournalEntryEdit> {
                 TextField(
                   keyboardType: TextInputType.number,
                   controller: TextEditingController(
-                      text: widget.jentry.portions.toString()),
+                      text: widget.jentry!.portions.toString()),
                   decoration: InputDecoration(
                     icon: Icon(Icons.fastfood),
                     labelText:
                         AppLocalizations.of(context).translate("portions"),
                     hintText:
                         AppLocalizations.of(context).translate("portions_hint"),
-                    helperText: widget.jentry.getCaloriesString(context),
+                    helperText: widget.jentry!.getCaloriesString(context),
                   ),
                   onChanged: (value) {
-                    widget.jentry.portions = double.tryParse(value);
+                    double? parsed = double.tryParse(value);
+                    widget.jentry!.portions = parsed == null ? 0 : parsed;
                     setState(() {});
                   },
                 ),
                 TextField(
                   readOnly: true,
                   controller: TextEditingController(
-                      text: widget.jentry.getLocalizedCategory(context)),
+                      text: widget.jentry!.getLocalizedCategory(context)),
                   decoration: InputDecoration(
                       icon: Icon(Icons.category),
                       labelText: AppLocalizations.of(context)
@@ -196,7 +197,7 @@ class _JournalEntryEditState extends State<JournalEntryEdit> {
                   readOnly: true,
                   controller: TextEditingController(
                     text:
-                        new DateFormat.yMMMMd().format(widget.jentry.dateTime),
+                        new DateFormat.yMMMMd().format(widget.jentry!.dateTime),
                   ),
                   decoration: InputDecoration(
                     icon: Icon(Icons.date_range),

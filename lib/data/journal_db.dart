@@ -1,25 +1,25 @@
 // Copyright (C) 2021 Roman Zubin
-// 
+//
 // This file is part of Honest Calorie.
-// 
+//
 // Honest Calorie is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
-// 
+//
 // Honest Calorie is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
-// 
+//
 // You should have received a copy of the GNU General Public License
 // along with Honest Calorie.  If not, see <http://www.gnu.org/licenses/>.
 
 import 'package:flutter/foundation.dart';
-import 'package:nutrition_tracker/extensions/datetime.dart';
-import 'package:nutrition_tracker/main.dart';
-import 'package:nutrition_tracker/types/journal_entry.dart';
-import 'package:nutrition_tracker/types/journal_filter.dart';
+import 'package:honest_calorie/extensions/datetime.dart';
+import 'package:honest_calorie/main.dart';
+import 'package:honest_calorie/types/journal_entry.dart';
+import 'package:honest_calorie/types/journal_filter.dart';
 import 'dart:convert';
 import 'dart:io';
 import 'package:path_provider/path_provider.dart';
@@ -29,7 +29,7 @@ class JournalDatabase {
 
   List<Future> futures = [];
 
-  List<JournalEntry> _jlist;
+  late List<JournalEntry> _jlist;
 
   int entryCount() {
     return _jlist.length;
@@ -40,7 +40,7 @@ class JournalDatabase {
 
     List<int> list = [];
     for (int i = 0; i < _jlist.length; i++) {
-      if (_jlist[i].dateTime.isSameDate(filter.dateFrom)) {
+      if (_jlist[i].dateTime.isSameDate(filter.dateFrom!)) {
         list.add(i);
       }
     }
@@ -86,8 +86,10 @@ class JournalDatabase {
     return File(path + "/journal-db.json");
   }
 
+  // TODO: fix this
   Future<bool> load() async {
     futures.add(_loadRoutine());
+    return true;
   }
 
   Future<bool> _loadRoutine() async {

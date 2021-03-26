@@ -1,17 +1,17 @@
 // Copyright (C) 2021 Roman Zubin
-// 
+//
 // This file is part of Honest Calorie.
-// 
+//
 // Honest Calorie is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
-// 
+//
 // Honest Calorie is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
-// 
+//
 // You should have received a copy of the GNU General Public License
 // along with Honest Calorie.  If not, see <http://www.gnu.org/licenses/>.
 
@@ -27,14 +27,14 @@ class AppLocalizations {
   // Helper method to keep the code in the widgets concise
   // Localizations are accessed using an InheritedWidget "of" syntax
   static AppLocalizations of(BuildContext context) {
-    return Localizations.of<AppLocalizations>(context, AppLocalizations);
+    return Localizations.of<AppLocalizations>(context, AppLocalizations)!;
   }
 
   // Static member to have a simple access to the delegate from the MaterialApp
   static const LocalizationsDelegate<AppLocalizations> delegate =
       _AppLocalizationsDelegate();
 
-  Map<String, String> _localizedStrings;
+  late Map<String, String> _localizedStrings;
 
   Future<bool> load() async {
     // Load the language JSON file from the "lang" folder
@@ -52,7 +52,7 @@ class AppLocalizations {
   // This method will be called from every widget which needs a localized text
   String translate(String key) {
     if (_localizedStrings[key] != null)
-      return _localizedStrings[key];
+      return _localizedStrings[key]!;
     else {
       debugPrint("LOCALE ERROR: no such key: " + key);
       return "LOCALE ERROR: no such key: " + key;

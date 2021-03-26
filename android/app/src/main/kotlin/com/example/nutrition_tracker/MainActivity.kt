@@ -1,4 +1,4 @@
-package com.example.nutrition_tracker
+package com.example.honest_calorie
 
 import androidx.annotation.NonNull;
 import io.flutter.embedding.android.FlutterActivity

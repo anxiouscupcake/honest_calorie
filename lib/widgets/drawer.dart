@@ -16,12 +16,12 @@
 // along with Honest Calorie.  If not, see <http://www.gnu.org/licenses/>.
 
 import 'package:flutter/material.dart';
-import 'package:nutrition_tracker/localizations.dart';
-import 'package:nutrition_tracker/screens/forms/profile_edit_screen.dart';
+import 'package:honest_calorie/localizations.dart';
+import 'package:honest_calorie/screens/forms/profile_edit_screen.dart';
 import 'package:url_launcher/url_launcher.dart';
-import 'package:nutrition_tracker/main.dart';
-import 'package:nutrition_tracker/routes.dart';
-import 'package:nutrition_tracker/types/product_db_screen_arguments.dart';
+import 'package:honest_calorie/main.dart';
+import 'package:honest_calorie/routes.dart';
+import 'package:honest_calorie/types/product_db_screen_arguments.dart';
 
 class AppDrawer extends StatelessWidget {
   // temporary dialog
@@ -38,8 +38,7 @@ class AppDrawer extends StatelessWidget {
         context: context,
         builder: (context) {
           return SimpleDialog(
-            title: Text(
-                "This URL will be opened: " + url + "\n\nContinue?"),
+            title: Text("This URL will be opened: " + url + "\n\nContinue?"),
             children: <Widget>[
               Row(
                 children: <Widget>[
@@ -99,7 +98,9 @@ class AppDrawer extends StatelessWidget {
                     // TODO: localization
                     // TOOD: data is not updated since it's a stateless widget
                     title: Text(user.name == "" ? "User" : user.name),
-                    subtitle: user.getSummaryData() == null ? null : Text(user.getSummaryData()),
+                    subtitle: user.getSummaryData() == null
+                        ? null
+                        : Text(user.getSummaryData()!),
                     trailing: Icon(Icons.edit),
                     onTap: () {
                       Navigator.push(
@@ -153,10 +154,11 @@ class AppDrawer extends StatelessWidget {
               }),
           if (settings.showFeedback)
             ListTile(
-              title: Text(AppLocalizations.of(context).translate("report_issue")),
+              title:
+                  Text(AppLocalizations.of(context).translate("report_issue")),
               leading: Icon(Icons.bug_report),
-              onTap: () =>
-                  _goToURL(context, "https://github.com/utkabulka/honest_calorie/issues"),
+              onTap: () => _goToURL(context,
+                  "https://github.com/utkabulka/honest_calorie/issues"),
             ),
           Divider(),
           ListTile(

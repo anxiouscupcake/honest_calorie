@@ -1,33 +1,33 @@
 // Copyright (C) 2021 Roman Zubin
-// 
+//
 // This file is part of Honest Calorie.
-// 
+//
 // Honest Calorie is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
-// 
+//
 // Honest Calorie is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
-// 
+//
 // You should have received a copy of the GNU General Public License
 // along with Honest Calorie.  If not, see <http://www.gnu.org/licenses/>.
 
 import 'dart:ui';
 import 'package:intl/intl.dart';
 import 'package:flutter/material.dart';
-import 'package:nutrition_tracker/main.dart';
-import 'package:nutrition_tracker/routes.dart';
-import 'package:nutrition_tracker/screens/forms/journal_entry_edit_screen.dart';
-import 'package:nutrition_tracker/types/product.dart';
-import 'package:nutrition_tracker/types/product_db_screen_arguments.dart';
-import 'package:nutrition_tracker/types/journal_entry.dart';
-import 'package:nutrition_tracker/types/journal_filter.dart';
-import 'package:nutrition_tracker/widgets/drawer.dart';
-import 'package:nutrition_tracker/widgets/no_data.dart';
-import 'package:nutrition_tracker/localizations.dart';
+import 'package:honest_calorie/main.dart';
+import 'package:honest_calorie/routes.dart';
+import 'package:honest_calorie/screens/forms/journal_entry_edit_screen.dart';
+import 'package:honest_calorie/types/product.dart';
+import 'package:honest_calorie/types/product_db_screen_arguments.dart';
+import 'package:honest_calorie/types/journal_entry.dart';
+import 'package:honest_calorie/types/journal_filter.dart';
+import 'package:honest_calorie/widgets/drawer.dart';
+import 'package:honest_calorie/widgets/no_data.dart';
+import 'package:honest_calorie/localizations.dart';
 
 class JournalScreen extends StatefulWidget {
   static const String routeName = "/journal";

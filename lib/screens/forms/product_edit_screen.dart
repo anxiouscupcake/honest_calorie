@@ -20,13 +20,13 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/foundation.dart';
-import 'package:nutrition_tracker/localizations.dart';
+import 'package:honest_calorie/localizations.dart';
 
-import 'package:nutrition_tracker/types/product.dart';
-import 'package:nutrition_tracker/main.dart';
+import 'package:honest_calorie/types/product.dart';
+import 'package:honest_calorie/main.dart';
 
-import 'package:nutrition_tracker/types/exceptions/index_is_null.dart';
-import 'package:nutrition_tracker/widgets/category_selector.dart';
+import 'package:honest_calorie/types/exceptions/index_is_null.dart';
+import 'package:honest_calorie/widgets/category_selector.dart';
 
 class ProductDBEdit extends StatefulWidget {
   final Product product;
@@ -71,7 +71,8 @@ class _ProductDBEditState extends State<ProductDBEdit> {
 
   Future<String> _getData(String code) async {
     var response = await http.get(
-        Uri.encodeFull("https://world.openfoodfacts.org/api/v0/product/" + code + ".json"),
+        Uri.encodeFull(
+            "https://world.openfoodfacts.org/api/v0/product/" + code + ".json"),
         headers: {"Accept": "application/json"});
 
     setState(() {

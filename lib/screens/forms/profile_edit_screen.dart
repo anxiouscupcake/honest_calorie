@@ -18,12 +18,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:intl/intl.dart';
-import 'package:nutrition_tracker/localizations.dart';
-import 'package:nutrition_tracker/main.dart';
-import 'package:nutrition_tracker/widgets/category_selector.dart';
+import 'package:honest_calorie/localizations.dart';
+import 'package:honest_calorie/main.dart';
+import 'package:honest_calorie/widgets/category_selector.dart';
 
 class ProfileEdit extends StatefulWidget {
-  ProfileEdit({Key key}) : super(key: key);
+  ProfileEdit();
 
   @override
   _ProfileEditState createState() => _ProfileEditState();
@@ -155,8 +155,10 @@ class _ProfileEditState extends State<ProfileEdit> {
                   onChanged: (String value) {
                     if (value == "")
                       user.height = 0;
-                    else
-                      user.height = double.tryParse(value);
+                    else {
+                      double? parsed = double.tryParse(value);
+                      user.height = parsed == null ? 0 : parsed;
+                    }
                   },
                 ),
                 TextField(
@@ -170,8 +172,10 @@ class _ProfileEditState extends State<ProfileEdit> {
                   onChanged: (String value) {
                     if (value == "")
                       user.weight = 0;
-                    else
-                      user.weight = double.tryParse(value);
+                    else {
+                      double? parsed = double.tryParse(value);
+                      user.weight = parsed == null ? 0 : parsed;
+                    }
                   },
                 ),
               ],
