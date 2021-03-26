@@ -1,4 +1,4 @@
-// Copyright (C) 2020 Roman Zubin
+// Copyright (C) 2021 Roman Zubin
 //
 // This file is part of Honest Calorie.
 //
@@ -39,7 +39,7 @@ class AppDrawer extends StatelessWidget {
         builder: (context) {
           return SimpleDialog(
             title: Text(
-                "В браузере откроется этот URL: " + url + "\n\nПродолжить?"),
+                "This URL will be opened: " + url + "\n\nContinue?"),
             children: <Widget>[
               Row(
                 children: <Widget>[
@@ -153,18 +153,10 @@ class AppDrawer extends StatelessWidget {
               }),
           if (settings.showFeedback)
             ListTile(
-              title: Text(AppLocalizations.of(context).translate("report_bug")),
+              title: Text(AppLocalizations.of(context).translate("report_issue")),
               leading: Icon(Icons.bug_report),
               onTap: () =>
-                  _goToURL(context, "https://forms.gle/YLX9CXJx5d3xgHV16"),
-            ),
-          if (settings.showFeedback)
-            ListTile(
-              title:
-                  Text(AppLocalizations.of(context).translate("give_feedback")),
-              leading: Icon(Icons.bug_report),
-              onTap: () =>
-                  _goToURL(context, "https://forms.gle/FNS8j6boTuAn7usn6"),
+                  _goToURL(context, "https://github.com/utkabulka/honest_calorie/issues"),
             ),
           Divider(),
           ListTile(

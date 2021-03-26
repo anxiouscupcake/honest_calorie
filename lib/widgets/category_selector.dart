@@ -1,4 +1,4 @@
-// Copyright (C) 2020 Roman Zubin
+// Copyright (C) 2021 Roman Zubin
 // 
 // This file is part of Honest Calorie.
 // 
