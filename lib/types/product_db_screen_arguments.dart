@@ -18,5 +18,8 @@
 class ProductDBScreenArguments {
   /// Defines if this widget will be used to pick a product.
   final bool isPicker;
-  ProductDBScreenArguments(this.isPicker);
+
+  const ProductDBScreenArguments({required this.isPicker});
+
+  //ProductDBScreenArguments(this.isPicker);
 }

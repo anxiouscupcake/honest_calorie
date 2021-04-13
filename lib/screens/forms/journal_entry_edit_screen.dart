@@ -65,7 +65,7 @@ class _JournalEntryEditState extends State<JournalEntryEdit> {
 
   _pickProduct(BuildContext context) async {
     final picked = await Navigator.pushNamed(context, Routes.product_db,
-        arguments: ProductDBScreenArguments(true));
+        arguments: ProductDBScreenArguments(isPicker: true));
     if (picked != null) {
       setState(() {
         widget.jentry!.product = picked as Product;

@@ -21,7 +21,8 @@ import 'package:honest_calorie/screens/forms/profile_edit_screen.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:honest_calorie/main.dart';
 import 'package:honest_calorie/routes.dart';
-import 'package:honest_calorie/types/product_db_screen_arguments.dart';
+
+import '../types/product_db_screen_arguments.dart';
 
 class AppDrawer extends StatelessWidget {
   // temporary dialog
@@ -129,7 +130,7 @@ class AppDrawer extends StatelessWidget {
               leading: Icon(Icons.fastfood),
               onTap: () {
                 Navigator.pushReplacementNamed(context, Routes.product_db,
-                    arguments: ProductDBScreenArguments(false));
+                    arguments: new ProductDBScreenArguments(isPicker: false));
                 currentScreen = "products";
               }),
           ListTile(

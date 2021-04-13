@@ -55,7 +55,7 @@ class JournalScreenState extends State<JournalScreen> {
 
   _addNewEntry() async {
     final dynamic picked = await Navigator.pushNamed(context, Routes.product_db,
-        arguments: ProductDBScreenArguments(true));
+        arguments: ProductDBScreenArguments(isPicker: true));
     if (picked != null) {
       await Navigator.push(
         context,

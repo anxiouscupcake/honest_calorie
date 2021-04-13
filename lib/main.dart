@@ -32,6 +32,8 @@ import 'package:honest_calorie/screens/product_db_screen.dart';
 import 'package:honest_calorie/screens/settings_screen.dart';
 import 'package:honest_calorie/screens/statistics_screen.dart';
 
+import 'screens/product_db_screen.dart';
+
 late Settings settings;
 late User user;
 late ProductDatabase products;

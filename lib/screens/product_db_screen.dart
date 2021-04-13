@@ -28,13 +28,13 @@ import 'package:honest_calorie/widgets/no_data.dart';
 
 class ProductDBScreen extends StatefulWidget {
   static const String routeName = "/product_db";
+
   @override
   State createState() => new _ProductDBState();
 }
 
 class _ProductDBState extends State<ProductDBScreen> {
   ProductFilter filter = new ProductFilter();
-  ProductDBScreenArguments args = new ProductDBScreenArguments(false);
 
   String getProductSubtitle(Product product) {
     String subtitle = product.calories.toString() +
@@ -49,7 +49,12 @@ class _ProductDBState extends State<ProductDBScreen> {
 
   @override
   Widget build(BuildContext context) {
-    //final Object args = ModalRoute.of(context)!.settings.arguments!;
+    ProductDBScreenArguments args =
+        new ProductDBScreenArguments(isPicker: false);
+    if (ModalRoute.of(context)!.settings != null) {
+      args = ModalRoute.of(context)!.settings.arguments
+          as ProductDBScreenArguments;
+    }
 
     return Scaffold(
         drawer: args.isPicker ? null : AppDrawer(),
