@@ -37,7 +37,7 @@ class JournalScreen extends StatefulWidget {
 
 class JournalScreenState extends State<JournalScreen> {
   DateTime _date = new DateTime.now();
-  JournalFilter filter;
+  late JournalFilter filter;
 
   _pickDate(BuildContext context) async {
     final picked = await showDatePicker(
@@ -54,7 +54,7 @@ class JournalScreenState extends State<JournalScreen> {
   }
 
   _addNewEntry() async {
-    final picked = await Navigator.pushNamed(context, Routes.product_db,
+    final dynamic picked = await Navigator.pushNamed(context, Routes.product_db,
         arguments: ProductDBScreenArguments(true));
     if (picked != null) {
       await Navigator.push(
@@ -167,14 +167,15 @@ class JournalScreenState extends State<JournalScreen> {
           FutureBuilder(
               future: journal.getEntriesFiltered(filter),
               builder: (context, snapshot) {
+                dynamic s = snapshot;
                 if (snapshot.hasData) {
-                  if (snapshot.data.length > 0) {
+                  if (s.data.length > 0) {
                     double totalCalories = 0;
                     List<JournalEntry> breakfast = [];
                     List<JournalEntry> dinner = [];
                     List<JournalEntry> supper = [];
                     List<JournalEntry> other = [];
-                    for (int index in snapshot.data) {
+                    for (int index in s.data) {
                       JournalEntry entry = journal.getEntryByIndex(index);
                       totalCalories += entry.portions * entry.product.calories;
                       switch (entry.category) {

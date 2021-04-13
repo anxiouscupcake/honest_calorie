@@ -63,7 +63,7 @@ class JournalEntry {
     // TODO: optimize this (low priority)
     // for some reason if "product = new Product.fromJson(json["product"]);" is used
     // exception is caught: type 'String' is not a subtype of type 'Map<String, dynamic>'
-    Map map = jsonDecode(json["product"].toString());
+    Map<String, dynamic> map = jsonDecode(json["product"].toString());
     product = new Product.fromJson(map);
     portions = json["portions"];
     category = json["category"];

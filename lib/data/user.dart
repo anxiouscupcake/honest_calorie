@@ -88,7 +88,7 @@ class User {
     try {
       final file = await _localFile;
       String content = await file.readAsString();
-      Map map = jsonDecode(content);
+      Map<String, dynamic> map = jsonDecode(content);
       User u = User.fromJson(map);
       this.name = u.name;
       this.gender = u.gender;

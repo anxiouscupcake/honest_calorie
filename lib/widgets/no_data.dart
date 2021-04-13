@@ -18,13 +18,10 @@
 import 'package:flutter/material.dart';
 
 class NoData extends StatelessWidget {
-  final IconData iconData;
-  final String text;
+  final IconData? iconData;
+  final String? text;
 
-  const NoData(
-    this.iconData,
-    this.text,
-  );
+  const NoData({Key? key, this.iconData, this.text}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -44,7 +41,7 @@ class NoData extends StatelessWidget {
             ),
           ),
           Text(
-            text,
+            text!,
             style: TextStyle(
               color: Colors.grey[700],
               fontWeight: FontWeight.w400,

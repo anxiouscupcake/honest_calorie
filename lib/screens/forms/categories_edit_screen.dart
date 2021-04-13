@@ -33,7 +33,7 @@ class _CategoriesEditState extends State<CategoriesEditScreen> {
   late List<EditableCategory> _categories;
 
   _editCategory(BuildContext context, int index) async {
-    String input;
+    String input = "";
     return showDialog(
         context: context,
         barrierDismissible: true,
@@ -65,7 +65,7 @@ class _CategoriesEditState extends State<CategoriesEditScreen> {
                   child: Text("Cancel")),
               FlatButton(
                   onPressed: () {
-                    if (input != null) {
+                    if (input != "") {
                       if (index >= 0) {
                         settings.mealCategories[index] = input;
                       } else {
@@ -165,9 +165,9 @@ class _CategoriesEditState extends State<CategoriesEditScreen> {
               title: Text(settings.mealCategories[i]),
               trailing: Checkbox(
                   value: _categories[i].isSelected,
-                  onChanged: (bool value) {
+                  onChanged: (bool? value) {
                     setState(() {
-                      _categories[i].isSelected = value;
+                      _categories[i].isSelected = value!;
                     });
                   }),
               onTap: () async {

@@ -60,7 +60,6 @@ class _ProductDBState extends State<ProductDBScreen> {
                 MaterialPageRoute(
                   builder: (context) => ProductDBEdit(
                     product: new Product(),
-                    index: -1,
                     isEditing: false,
                   ),
                 ));
@@ -109,16 +108,17 @@ class _ProductDBState extends State<ProductDBScreen> {
               FutureBuilder(
                   future: products.getProductsFiltered(filter),
                   builder: (context, snapshot) {
+                    dynamic s = snapshot;
                     if (snapshot.hasData) {
-                      if (snapshot.data.length > 0) {
+                      if (s.data.length > 0) {
                         return Expanded(
                             child: ListView.builder(
                           scrollDirection: Axis.vertical,
                           shrinkWrap: true,
-                          itemCount: snapshot.data.length,
+                          itemCount: s.data.length,
                           itemBuilder: (context, int index) {
-                            Product product = products
-                                .getProductByIndex(snapshot.data[index]);
+                            Product product =
+                                products.getProductByIndex(s.data[index]);
                             return Column(
                               children: <Widget>[
                                 ListTile(
@@ -134,7 +134,6 @@ class _ProductDBState extends State<ProductDBScreen> {
                                               builder: (context) =>
                                                   ProductDBEdit(
                                                     product: product,
-                                                    index: snapshot.data[index],
                                                     isEditing: true,
                                                   )));
                                       setState(() {});

@@ -96,14 +96,23 @@ class ProductDatabase {
     return true;
   }
 
+  // TODO: make this async
   /// Removes given product.
-  removeProduct(int index) {
-    _flist.removeAt(index);
+  removeProduct(Product product) {
+    _flist.remove(product);
     saveDatabase();
   }
 
-  replaceProduct(Product product, int index) {
-    _flist[index] = product;
+  // TODO: make this async
+  // TODO: what
+  /// Replaces given product (product) with another product (withProduct).
+  replaceProduct(Product product, Product withProduct) {
+    for (int i = 0; i < _flist.length; i++) {
+      if (_flist[i] == product) {
+        _flist[i] = withProduct;
+        break;
+      }
+    }
     saveDatabase();
   }
 

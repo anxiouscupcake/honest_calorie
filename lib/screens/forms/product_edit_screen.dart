@@ -31,14 +31,12 @@ import 'package:honest_calorie/widgets/category_selector.dart';
 class ProductDBEdit extends StatefulWidget {
   final Product product;
   final bool isEditing;
-  final int index;
 
   const ProductDBEdit({
-    Key key,
-    @required this.product,
-    @required this.isEditing,
-    this.index,
-  }) : super(key: key);
+    //Key key,
+    required this.product,
+    required this.isEditing,
+  });
 
   @override
   _ProductDBEditState createState() => _ProductDBEditState();
@@ -70,23 +68,18 @@ class _ProductDBEditState extends State<ProductDBEdit> {
   }
 
   Future<String> _getData(String code) async {
-    var response = await http.get(
-        Uri.encodeFull(
-            "https://world.openfoodfacts.org/api/v0/product/" + code + ".json"),
+    /* var response = await http.get(
+        Uri.encodeFull("https://world.openfoodfacts.org/api/v0/product/" + code + ".json"),
         headers: {"Accept": "application/json"});
-
+    */
     setState(() {
-      var data = json.decode(response.body);
+      //var data = json.decode(response.body);
     });
     return "Success";
   }
 
   @override
   Widget build(BuildContext context) {
-    if (widget.isEditing && widget.index == null) {
-      throw new IndexIsNull();
-    }
-
     return Scaffold(
         appBar: AppBar(
           title: Text(widget.isEditing
@@ -103,15 +96,16 @@ class _ProductDBEditState extends State<ProductDBEdit> {
               IconButton(
                   icon: Icon(Icons.delete),
                   onPressed: () {
-                    // TODO: confirmation
-                    products.removeProduct(widget.index);
+                    // TODO: add confirmation
+                    products.removeProduct(widget.product);
                     Navigator.pop(context);
                   }),
             IconButton(
               icon: Icon(Icons.check),
               onPressed: () async {
                 if (widget.isEditing) {
-                  products.replaceProduct(widget.product, widget.index);
+                  //products.replaceProduct(widget.product, widget.index);
+                  products.saveDatabase();
                   Navigator.pop(context);
                 } else {
                   if (await products.addProduct(widget.product)) {
@@ -169,7 +163,8 @@ class _ProductDBEditState extends State<ProductDBEdit> {
                           .translate("calories_hint"),
                     ),
                     onChanged: (String value) {
-                      widget.product.calories = int.tryParse(value);
+                      int? i = int.tryParse(value);
+                      widget.product.calories = i == null ? 0 : i;
                     },
                   ),
                   // TODO: make smart spacing
@@ -188,7 +183,8 @@ class _ProductDBEditState extends State<ProductDBEdit> {
                                 .translate("serving_size"),
                           ),
                           onChanged: (String value) {
-                            widget.product.servingSize = int.tryParse(value);
+                            int? i = int.tryParse(value);
+                            widget.product.servingSize = i == null ? 0 : i;
                           },
                         ),
                       ),
