@@ -105,7 +105,7 @@ class _ProductDBEditState extends State<ProductDBEdit> {
               onPressed: () async {
                 if (widget.isEditing) {
                   //products.replaceProduct(widget.product, widget.index);
-                  products.saveDatabase();
+                  products.save();
                   Navigator.pop(context);
                 } else {
                   if (await products.addProduct(widget.product)) {

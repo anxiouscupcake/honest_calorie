@@ -26,8 +26,6 @@ import 'package:path_provider/path_provider.dart';
 class ProductDatabase {
   ProductDatabase();
 
-  List<Future> futures = [];
-
   List<Product> _flist = [];
 
   /// Total count of stored products.
@@ -37,9 +35,6 @@ class ProductDatabase {
 
   /// Returns indexes of products.
   Future<List<int>> getProductsFiltered(ProductFilter filter) async {
-    await Future.wait(futures);
-    futures = [];
-
     List<int> list = [];
     filter.searchQuery = filter.searchQuery.toLowerCase();
     for (int i = 0; i < _flist.length; i++) {
@@ -82,17 +77,16 @@ class ProductDatabase {
   /// Adds given product item to database.
   Future<bool> addProduct(Product product) async {
     bool b = await _addProduct(product);
-    if (b) await saveDatabase();
+    if (b) await save();
     return b;
   }
 
-  // TODO: fix
   Future addProductList(List<Product> list) async {
     for (Product item in list) {
       // TODO: это скорее всего сильно замедлит работу, нужно что-то придумать
       await _addProduct(item);
     }
-    await saveDatabase();
+    await save();
     return true;
   }
 
@@ -100,7 +94,7 @@ class ProductDatabase {
   /// Removes given product.
   removeProduct(Product product) {
     _flist.remove(product);
-    saveDatabase();
+    save();
   }
 
   // TODO: make this async
@@ -113,7 +107,7 @@ class ProductDatabase {
         break;
       }
     }
-    saveDatabase();
+    save();
   }
 
   Future<String> get _localPath async {
@@ -126,11 +120,7 @@ class ProductDatabase {
     return File(path + "/product-db.json");
   }
 
-  Future<bool?> load() async {
-    futures.add(_loadRoutine());
-  }
-
-  Future<bool> _loadRoutine() async {
+  Future<bool> load() async {
     Stopwatch stopwatch = new Stopwatch();
     stopwatch.start();
     try {
@@ -149,7 +139,7 @@ class ProductDatabase {
       debugPrint(
           "Failed to read product database file. Creating default one...");
       await _createDefaultDatabase();
-      await saveDatabase();
+      await save();
       stopwatch.stop();
       return false;
     }
@@ -159,12 +149,7 @@ class ProductDatabase {
     // TODO: implement default db
   }
 
-  /// Writes database to file.
-  Future saveDatabase() async {
-    futures.add(_saveDatabaseRoutine());
-  }
-
-  Future<File> _saveDatabaseRoutine() async {
+  Future<File> save() async {
     Stopwatch stopwatch = new Stopwatch();
     stopwatch.start();
     final file = await _localFile;

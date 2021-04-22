@@ -17,7 +17,6 @@
 
 import 'package:flutter/foundation.dart';
 import 'package:honest_calorie/extensions/datetime.dart';
-import 'package:honest_calorie/main.dart';
 import 'package:honest_calorie/types/journal_entry.dart';
 import 'package:honest_calorie/types/journal_filter.dart';
 import 'dart:convert';
@@ -27,8 +26,6 @@ import 'package:path_provider/path_provider.dart';
 class JournalDatabase {
   JournalDatabase();
 
-  List<Future> futures = [];
-
   late List<JournalEntry> _jlist;
 
   int entryCount() {
@@ -36,8 +33,6 @@ class JournalDatabase {
   }
 
   Future<List<int>> getEntriesFiltered(JournalFilter filter) async {
-    await Future.wait(futures);
-
     List<int> list = [];
     for (int i = 0; i < _jlist.length; i++) {
       if (_jlist[i].dateTime.isSameDate(filter.dateFrom!)) {
@@ -54,26 +49,25 @@ class JournalDatabase {
   /// Adds given product item to database.
   Future<bool> _addEntry(JournalEntry entry) async {
     _jlist.add(entry);
-    saveDatabase();
+    save();
     return true;
   }
 
   Future<bool> addEntry(JournalEntry entry) async {
     bool b = await _addEntry(entry);
-    if (b) saveDatabase();
+    if (b) save();
     debugPrint("JSON: " + jsonEncode(entry));
     return b;
   }
 
   removeEntry(JournalEntry entry) {
     _jlist.remove(entry);
-    //_jlist.removeAt(index);
-    saveDatabase();
+    save();
   }
 
   replaceWith(JournalEntry entry, int index) {
     _jlist[index] = entry;
-    saveDatabase();
+    save();
   }
 
   Future<String> get _localPath async {
@@ -86,13 +80,7 @@ class JournalDatabase {
     return File(path + "/journal-db.json");
   }
 
-  // TODO: fix this
   Future<bool> load() async {
-    futures.add(_loadRoutine());
-    return true;
-  }
-
-  Future<bool> _loadRoutine() async {
     Stopwatch stopwatch = new Stopwatch();
     stopwatch.start();
     try {
@@ -109,18 +97,14 @@ class JournalDatabase {
     } catch (e) {
       debugPrint("Caught exception: " + e.toString());
       debugPrint("Failed to read journal file. Creating default one...");
-      await saveDatabase();
+      await save();
       stopwatch.stop();
       return false;
     }
   }
 
-  Future saveDatabase() async {
-    futures.add(_saveDatabaseRoutine());
-  }
-
   /// Writes database to file.
-  Future<File> _saveDatabaseRoutine() async {
+  Future<File> save() async {
     Stopwatch stopwatch = new Stopwatch();
     stopwatch.start();
     final file = await _localFile;

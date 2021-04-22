@@ -134,7 +134,7 @@ class _JournalEntryEditState extends State<JournalEntryEdit> {
             icon: Icon(Icons.check),
             onPressed: () {
               if (widget.isEditing!) {
-                journal.saveDatabase();
+                journal.save();
               } else {
                 journal.addEntry(widget.jentry!);
               }
