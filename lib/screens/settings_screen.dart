@@ -87,8 +87,8 @@ class SettingsScreenState extends State<SettingsScreen> {
             */
             SwitchListTile(
                 secondary: Icon(Icons.bug_report),
-                title: Text("Show feedback buttons"),
-                subtitle: Text("Shows feedback buttons in drawer"),
+                title: Text("Show feedback button"),
+                subtitle: Text("Shows feedback button in drawer"),
                 value: settings.showFeedback,
                 onChanged: (bool value) async {
                   setState(() {

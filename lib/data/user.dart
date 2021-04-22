@@ -23,43 +23,45 @@ import 'package:path_provider/path_provider.dart';
 class User {
   User();
 
-  String name = "";
-  String gender = "";
-  DateTime birthday = DateTime.now();
-  double weight = 0.0; // kg
-  double height = 0.0; // cm
+  String name = "User";
+  String? gender;
+  DateTime? birthday;
+  double? weight; // kg
+  double? height; // cm
 
   String? getSummaryData() {
-    bool isNull = true;
     String summary = "";
 
-    if (weight > 0) {
-      summary += weight.toString() + " kg";
-      isNull = false;
-      if (height > 0) {
-        summary += ", BMI: " + getBMI().toStringAsFixed(1);
+    if (weight != null && height != null) {
+      if (weight! > 0) {
+        summary += weight.toString() + " kg";
+        if (height! > 0 && getBMI() != null) {
+          summary += ", BMI: " + getBMI()!.toStringAsFixed(1);
+        }
       }
-    }
-
-    if (isNull)
-      return null;
-    else
       return summary;
+    } else {
+      return null;
+    }
   }
 
-  double getBMI() {
-    if (weight == 0 || height == 0)
-      return 0;
-    else
-      return weight / ((height / 100.0) * (height / 100.0));
+  double? getBMI() {
+    if (weight != null && height != null) {
+      if (weight! == 0 || height! == 0)
+        return null;
+      else
+        return weight! / ((height! / 100.0) * (height! / 100.0));
+    } else {
+      return null;
+    }
   }
 
-  // TODO: убрать запись пустых полей
   User.fromJson(Map<String, dynamic> json) {
-    name = json['name'];
-    gender = json['gender'];
-    height = json['height'];
-    weight = json['weight'];
+    json['name'] != null ? name = json['name'] : name = "User";
+    json['gender'] != null ? gender = json['gender'] : gender = null;
+    json['height'] != null ? height = json['height'] : height = null;
+    json['weight'] != null ? weight = json['weight'] : weight = null;
+
     if (json["birthday"] != null) {
       String dateString = json["birthday"];
       birthday = DateTime.parse(dateString);
@@ -68,10 +70,10 @@ class User {
 
   Map<String, dynamic> toJson() => {
         "name": name,
-        "gender": gender,
-        "height": height,
-        "weight": weight,
-        if (birthday != null) "birthday": birthday.toIso8601String(),
+        if (gender != null) "gender": gender,
+        if (height != null) "height": height,
+        if (weight != null) "weight": weight,
+        if (birthday != null) "birthday": birthday!.toIso8601String(),
       };
 
   Future<String> get _localPath async {

@@ -33,7 +33,8 @@ class _ProfileEditState extends State<ProfileEdit> {
   _pickDate(BuildContext context) async {
     final picked = await showDatePicker(
       context: context,
-      initialDate: user.birthday == null ? DateTime(2000, 1, 1) : user.birthday,
+      initialDate:
+          user.birthday != null ? user.birthday! : DateTime(2000, 1, 1),
       firstDate: DateTime(1900, 1),
       lastDate: DateTime(3000),
     );
@@ -129,14 +130,13 @@ class _ProfileEditState extends State<ProfileEdit> {
                     _pickGender(context);
                   },
                 ),
-                // TODO: спрашивать дату рождения, а не возраст
                 TextField(
                   readOnly: true,
                   controller: TextEditingController(
                       // TODO: localization
-                      text: user.birthday == null
-                          ? "Tap to select your birth date"
-                          : new DateFormat.yMMMMd().format(user.birthday)),
+                      text: user.birthday != null
+                          ? new DateFormat.yMMMMd().format(user.birthday!)
+                          : "Tap to select your birth date"),
                   decoration: const InputDecoration(
                     icon: Icon(Icons.cake),
                   ),
@@ -147,34 +147,36 @@ class _ProfileEditState extends State<ProfileEdit> {
                 TextField(
                   keyboardType: TextInputType.number,
                   controller: TextEditingController(
-                      text: user.height == 0 ? "" : user.height.toString()),
+                      text: (user.height == 0 || user.height == null)
+                          ? ""
+                          : user.height.toString()),
                   decoration: const InputDecoration(
                       icon: Icon(Icons.person),
                       labelText: "Height",
                       hintText: "Your height in centimeters"),
                   onChanged: (String value) {
                     if (value == "")
-                      user.height = 0;
+                      user.height = null;
                     else {
-                      double? parsed = double.tryParse(value);
-                      user.height = parsed == null ? 0 : parsed;
+                      user.height = double.tryParse(value);
                     }
                   },
                 ),
                 TextField(
                   keyboardType: TextInputType.number,
                   controller: TextEditingController(
-                      text: user.weight == 0 ? "" : user.weight.toString()),
+                      text: (user.weight == 0 || user.weight == null)
+                          ? ""
+                          : user.weight.toString()),
                   decoration: const InputDecoration(
                       icon: Icon(Icons.person),
                       labelText: "Weight",
                       hintText: "Your weight in kilograms"),
                   onChanged: (String value) {
                     if (value == "")
-                      user.weight = 0;
+                      user.weight = null;
                     else {
-                      double? parsed = double.tryParse(value);
-                      user.weight = parsed == null ? 0 : parsed;
+                      user.weight = double.tryParse(value);
                     }
                   },
                 ),
