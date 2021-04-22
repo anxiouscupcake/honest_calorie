@@ -45,11 +45,6 @@ String currentScreen = "journal";
 const bool isRelease = bool.fromEnvironment('dart.vm.product');
 
 void main() {
-  /*
-  if (isRelease) {
-    debugPrint = (String message, {int wrapWidth}) {};
-  }
-  */
   runApp(MyApp());
 }
 
@@ -79,7 +74,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     _loadData();
     return MaterialApp(
-      title: "Nutrition Tracker",
+      title: "Honest Calorie",
       home: JournalScreen(),
       theme: ThemeData(
         primaryColor: Colors.green,

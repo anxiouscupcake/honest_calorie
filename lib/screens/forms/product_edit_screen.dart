@@ -171,7 +171,7 @@ class _ProductDBEditState extends State<ProductDBEdit> {
                   Row(
                     children: <Widget>[
                       Container(
-                        width: MediaQuery.of(context).size.width * 0.45,
+                        width: MediaQuery.of(context).size.width * 0.44,
                         margin: EdgeInsets.only(right: 20),
                         child: TextField(
                           keyboardType: TextInputType.number,
@@ -236,7 +236,7 @@ class _ProductDBEditState extends State<ProductDBEdit> {
                   Row(
                     children: <Widget>[
                       Container(
-                        width: MediaQuery.of(context).size.width * 0.45,
+                        width: MediaQuery.of(context).size.width * 0.44,
                         margin: EdgeInsets.only(right: 20),
                         child: Column(
                           children: <Widget>[
@@ -313,7 +313,7 @@ class _ProductDBEditState extends State<ProductDBEdit> {
                         ),
                       ),
                       Container(
-                        width: MediaQuery.of(context).size.width * 0.45,
+                        width: MediaQuery.of(context).size.width * 0.44,
                         child: Column(
                           children: <Widget>[
                             TextField(

@@ -110,7 +110,7 @@ class JournalDatabase {
     final file = await _localFile;
     Future<File> f = file.writeAsString(jsonEncode(_jlist));
     stopwatch.stop();
-    debugPrint("DEBUG: Product database written in " +
+    debugPrint("DEBUG: Journal written in " +
         stopwatch.elapsedMilliseconds.toString() +
         "ms");
     return f;
