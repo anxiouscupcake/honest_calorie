@@ -23,8 +23,6 @@ import 'package:honest_calorie/types/product.dart';
 String lastCategory = "breakfast";
 
 class JournalEntry {
-  // TODO: remove this constructor
-  JournalEntry(this.dateTime);
   JournalEntry.fromProduct(this.product, this.dateTime);
 
   Product product = new Product();
@@ -53,16 +51,13 @@ class JournalEntry {
       case "other":
         return AppLocalizations.of(context).translate("other");
       default:
-        return "ERROR: no such unit: " + this.category;
+        return "ERROR: no such category: " + this.category;
     }
   }
 
   DateTime dateTime = DateTime.now();
 
   JournalEntry.fromJson(Map<String, dynamic> json) {
-    // TODO: optimize this (low priority)
-    // for some reason if "product = new Product.fromJson(json["product"]);" is used
-    // exception is caught: type 'String' is not a subtype of type 'Map<String, dynamic>'
     Map<String, dynamic> map = jsonDecode(json["product"].toString());
     product = new Product.fromJson(map);
     portions = json["portions"];

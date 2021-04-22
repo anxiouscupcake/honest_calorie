@@ -63,19 +63,6 @@ class AppDrawer extends StatelessWidget {
         });
   }
 
-  Widget _showWaterTracking(BuildContext context) {
-    return ListTile(
-      // TODO: remove disabler
-      enabled: false,
-      selected: currentScreen == "water tracking",
-      title: Text("Water tracking"),
-      leading: Icon(Icons.settings),
-      onTap: () {
-        // TODO: implement ontap
-      },
-    );
-  }
-
   @override
   Widget build(BuildContext context) {
     return Drawer(
@@ -104,6 +91,7 @@ class AppDrawer extends StatelessWidget {
                         : Text(user.getSummaryData()!),
                     trailing: Icon(Icons.edit),
                     onTap: () {
+                      // TODO: redraw drawer after changes
                       Navigator.push(
                           context,
                           MaterialPageRoute(
@@ -123,7 +111,6 @@ class AppDrawer extends StatelessWidget {
                 Navigator.pushReplacementNamed(context, Routes.journal);
                 currentScreen = "journal";
               }),
-          if (settings.waterTracking) _showWaterTracking(context),
           ListTile(
               selected: currentScreen == "products",
               title: Text(AppLocalizations.of(context).translate("products")),

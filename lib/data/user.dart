@@ -57,10 +57,10 @@ class User {
   }
 
   User.fromJson(Map<String, dynamic> json) {
-    json['name'] != null ? name = json['name'] : name = "User";
-    json['gender'] != null ? gender = json['gender'] : gender = null;
-    json['height'] != null ? height = json['height'] : height = null;
-    json['weight'] != null ? weight = json['weight'] : weight = null;
+    if (json['name'] != null) name = json['name'];
+    if (json['gender'] != null) gender = json['gender'];
+    if (json['height'] != null) height = json['height'];
+    if (json['weight'] != null) weight = json['weight'];
 
     if (json["birthday"] != null) {
       String dateString = json["birthday"];
