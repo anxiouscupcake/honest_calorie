@@ -16,6 +16,7 @@
 // along with Honest Calorie.  If not, see <http://www.gnu.org/licenses/>.
 
 import 'package:flutter/material.dart';
+import 'package:honest_calorie/localizations.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 _launchURL(String url) async {
@@ -31,19 +32,20 @@ Future<void> openURL(BuildContext context, String url) async {
       context: context,
       builder: (context) {
         return SimpleDialog(
-          title: Text("This URL will be opened: " + url + "\n\nContinue?"),
+          title: Text(AppLocalizations.of(context).translate("this_link_will_open") + 
+            url + "\n\n" + AppLocalizations.of(context).translate("ask_to_continue")),
           children: <Widget>[
             Row(
               children: <Widget>[
                 SimpleDialogOption(
-                  child: Text("Yes"),
+                  child: Text(AppLocalizations.of(context).translate("yes")),
                   onPressed: () {
                     _launchURL(url);
                     Navigator.pop(context);
                   },
                 ),
                 SimpleDialogOption(
-                  child: Text("No"),
+                  child: Text(AppLocalizations.of(context).translate("no")),
                   onPressed: () {
                     Navigator.pop(context);
                   },

@@ -18,7 +18,6 @@
 import 'package:flutter/material.dart';
 import 'package:honest_calorie/localizations.dart';
 import 'package:honest_calorie/screens/forms/profile_edit_screen.dart';
-//import 'package:url_launcher/url_launcher.dart';
 import 'package:honest_calorie/main.dart';
 import 'package:honest_calorie/routes.dart';
 import 'package:honest_calorie/widgets/open_url.dart';
@@ -26,45 +25,7 @@ import 'package:honest_calorie/widgets/open_url.dart';
 import '../types/product_db_screen_arguments.dart';
 
 class AppDrawer extends StatelessWidget {
-  /*
-  _launchURL(String url) async {
-    if (await canLaunch(url)) {
-      await launch(url);
-    } else {
-      throw "Could not launch URL: " + url;
-    }
-  }
-
-  Future<void> _goToURL(BuildContext context, String url) async {
-    return showDialog(
-        context: context,
-        builder: (context) {
-          return SimpleDialog(
-            title: Text("This URL will be opened: " + url + "\n\nContinue?"),
-            children: <Widget>[
-              Row(
-                children: <Widget>[
-                  SimpleDialogOption(
-                    child: Text("Yes"),
-                    onPressed: () {
-                      _launchURL(url);
-                      Navigator.pop(context);
-                    },
-                  ),
-                  SimpleDialogOption(
-                    child: Text("No"),
-                    onPressed: () {
-                      Navigator.pop(context);
-                    },
-                  ),
-                ],
-              )
-            ],
-          );
-        });
-  }
-  */
-
+  
   @override
   Widget build(BuildContext context) {
     return Drawer(

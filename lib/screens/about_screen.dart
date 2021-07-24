@@ -31,7 +31,7 @@ class AboutScreen extends StatelessWidget {
     return Scaffold(
         drawer: AppDrawer(),
         appBar: AppBar(
-          title: Text(AppLocalizations.of(context).translate("settings")),
+          title: Text(AppLocalizations.of(context).translate("about")),
         ),
         body: ListView(
           children: [

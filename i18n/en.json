@@ -1,4 +1,10 @@
 {
+    "yes": "Yes",
+    "no": "No",
+
+    "this_link_will_open": "This link will be opened: ",
+    "ask_to_continue": "Continue?",
+
     "something_went_wrong": "Something went wrong",
 	"tap_select_date": "Tap here to select date",
 	
