@@ -18,7 +18,7 @@
 import 'package:flutter/material.dart';
 import 'package:honest_calorie/main.dart';
 import 'package:honest_calorie/widgets/drawer.dart';
-import 'package:honest_calorie/screens/forms/categories_edit_screen.dart';
+import 'package:honest_calorie/widgets/meal_categories.dart';
 import 'package:honest_calorie/screens/forms/profile_edit_screen.dart';
 import 'package:honest_calorie/localizations.dart';
 
@@ -67,7 +67,7 @@ class SettingsScreenState extends State<SettingsScreen> {
               onTap: () => Navigator.push(
                   context,
                   MaterialPageRoute(
-                      builder: (context) => CategoriesEditScreen())),
+                      builder: (context) => MealCategoriesScreen())),
             ),
             SwitchListTile(
                 secondary: Icon(Icons.bug_report),

@@ -18,19 +18,13 @@
 import 'package:flutter/material.dart';
 import 'package:honest_calorie/main.dart';
 
-class EditableCategory {
-  String name;
-  bool isSelected;
-  EditableCategory(this.name, this.isSelected);
-}
-
-class CategoriesEditScreen extends StatefulWidget {
+class MealCategoriesScreen extends StatefulWidget {
   @override
-  State<StatefulWidget> createState() => new _CategoriesEditState();
+  State<StatefulWidget> createState() => new _MealCategoriesState();
 }
 
-class _CategoriesEditState extends State<CategoriesEditScreen> {
-  late List<EditableCategory> _categories;
+class _MealCategoriesState extends State<MealCategoriesScreen> {
+  List<String> _categories = <String>[];
 
   _editCategory(BuildContext context, int index) async {
     String input = "";
@@ -83,15 +77,8 @@ class _CategoriesEditState extends State<CategoriesEditScreen> {
   _updateList() {
     _categories = [];
     for (String category in settings.mealCategories) {
-      _categories.add(new EditableCategory(category, false));
+      _categories.add(category);
     }
-  }
-
-  bool _anyCategorySelected() {
-    for (EditableCategory item in _categories) {
-      if (item.isSelected) return true;
-    }
-    return false;
   }
 
   @override
@@ -107,38 +94,12 @@ class _CategoriesEditState extends State<CategoriesEditScreen> {
             Navigator.pop(context);
           },
         ),
-        actions: <Widget>[
-          if (_anyCategorySelected())
-            IconButton(
-              icon: Icon(Icons.delete),
-              onPressed: () {
-                setState(() {
-                  for (int i = 0; i < _categories.length; i++) {
-                    if (_categories[i].isSelected) {
-                      _categories.removeAt(i);
-                      settings.mealCategories.removeAt(i);
-                      i--;
-                    }
-                  }
-                  _updateList();
-                });
-              },
-            ),
-          IconButton(
-            icon: Icon(Icons.add),
-            onPressed: () async {
-              await _editCategory(context, -1);
-              _updateList();
-              setState(() {});
-            },
-          ),
-        ],
       ),
       body: ReorderableListView(
         onReorder: (oldIndex, newIndex) {
           setState(() {
             String old = settings.mealCategories[oldIndex];
-            EditableCategory oldCategory = _categories[oldIndex];
+            String oldCategory = _categories[oldIndex];
             if (oldIndex > newIndex) {
               for (int i = oldIndex; i > newIndex; i--) {
                 settings.mealCategories[i] = settings.mealCategories[i - 1];
@@ -163,13 +124,6 @@ class _CategoriesEditState extends State<CategoriesEditScreen> {
               key: ValueKey(settings.mealCategories[i]),
               leading: Icon(Icons.reorder),
               title: Text(settings.mealCategories[i]),
-              trailing: Checkbox(
-                  value: _categories[i].isSelected,
-                  onChanged: (bool? value) {
-                    setState(() {
-                      _categories[i].isSelected = value!;
-                    });
-                  }),
               onTap: () async {
                 await _editCategory(context, i);
                 setState(() {});
