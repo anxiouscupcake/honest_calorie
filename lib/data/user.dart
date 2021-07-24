@@ -97,6 +97,7 @@ class User {
       this.birthday = u.birthday;
       this.weight = u.weight;
       this.height = u.height;
+      debugPrint("User data is loaded");
       return true;
     } catch (e) {
       debugPrint("Failed to read user data file. Creating empty one...");

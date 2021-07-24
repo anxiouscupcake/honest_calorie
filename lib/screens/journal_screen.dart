@@ -21,7 +21,6 @@ import 'package:flutter/material.dart';
 import 'package:honest_calorie/main.dart';
 import 'package:honest_calorie/routes.dart';
 import 'package:honest_calorie/screens/forms/journal_entry_edit_screen.dart';
-import 'package:honest_calorie/types/product.dart';
 import 'package:honest_calorie/types/product_db_screen_arguments.dart';
 import 'package:honest_calorie/types/journal_entry.dart';
 import 'package:honest_calorie/types/journal_filter.dart';

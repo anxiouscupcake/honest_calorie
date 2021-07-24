@@ -49,7 +49,7 @@ class _ProductDBEditState extends State<ProductDBEdit> {
       context,
       MaterialPageRoute(
           builder: (context) => CategorySelector(
-                titleKey: "pick_category",
+                title: AppLocalizations.of(context).translate("pick_category"),
                 categoryKeys: categoryKeys,
               )),
     );

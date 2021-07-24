@@ -27,12 +27,16 @@ class JournalDatabase {
   JournalDatabase();
 
   late List<JournalEntry> _jlist;
+  bool _isLoaded = false;
 
   int entryCount() {
     return _jlist.length;
   }
 
   Future<List<int>> getEntriesFiltered(JournalFilter filter) async {
+    if (!_isLoaded)
+      await load();
+
     List<int> list = [];
     for (int i = 0; i < _jlist.length; i++) {
       if (_jlist[i].dateTime.isSameDate(filter.dateFrom!)) {
@@ -84,15 +88,14 @@ class JournalDatabase {
     Stopwatch stopwatch = new Stopwatch();
     stopwatch.start();
     try {
-      //await Future.delayed(const Duration(seconds: 3), () {});
       _jlist = [];
       final file = await _localFile;
       List<dynamic> d = await json.decode(file.readAsStringSync());
       _jlist = d.map<JournalEntry>((f) => JournalEntry.fromJson(f)).toList();
       stopwatch.stop();
       debugPrint("DEBUG: Journal loaded in " +
-          stopwatch.elapsedMilliseconds.toString() +
-          "ms");
+          stopwatch.elapsedMilliseconds.toString() + "ms");
+      _isLoaded = true;
       return true;
     } catch (e) {
       debugPrint("Caught exception: " + e.toString());

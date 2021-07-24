@@ -51,8 +51,7 @@ class _ProfileEditState extends State<ProfileEdit> {
       context,
       MaterialPageRoute(
           builder: (context) => CategorySelector(
-                // TODO: localiztaion
-                titleKey: "pick_gender",
+                title: AppLocalizations.of(context).translate("pick_gender"),
                 categoryKeys: categoryKeys,
               )),
     );

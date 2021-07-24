@@ -15,8 +15,6 @@
 // You should have received a copy of the GNU General Public License
 // along with Honest Calorie.  If not, see <http://www.gnu.org/licenses/>.
 
-import 'dart:ui';
-
 import 'package:flutter/material.dart';
 import 'package:honest_calorie/widgets/drawer.dart';
 import 'package:honest_calorie/localizations.dart';
@@ -36,6 +34,9 @@ class AboutScreen extends StatelessWidget {
         ),
         body: ListView(
           children: [
+            ListTile(
+              title: Text("Honest Calorie is made by Roman Zubin"),
+            ),
             FeedbackTile(),
           ],
         ));

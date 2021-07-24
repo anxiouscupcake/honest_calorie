@@ -38,23 +38,7 @@ class JournalEntry {
         this.product.getLocalizedUnit(context);
   }
 
-  /// Possible values: breakfast, dinner, supper, other
   String category = lastCategory;
-  String getLocalizedCategory(BuildContext context) {
-    switch (this.category) {
-      case "breakfast":
-        return AppLocalizations.of(context).translate("breakfast");
-      case "dinner":
-        return AppLocalizations.of(context).translate("dinner");
-      case "supper":
-        return AppLocalizations.of(context).translate("supper");
-      case "other":
-        return AppLocalizations.of(context).translate("other");
-      default:
-        return "ERROR: no such category: " + this.category;
-    }
-  }
-
   DateTime dateTime = DateTime.now();
 
   JournalEntry.fromJson(Map<String, dynamic> json) {

@@ -19,19 +19,19 @@ import 'package:flutter/material.dart';
 import 'package:honest_calorie/localizations.dart';
 
 class CategorySelector extends StatelessWidget {
-  /// Locale key for the title
-  final String titleKey;
+  
+  final String title;
 
   /// List of locale keys to show.
   final List<String> categoryKeys;
 
-  const CategorySelector({required this.titleKey, required this.categoryKeys});
+  const CategorySelector({required this.title, required this.categoryKeys});
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(AppLocalizations.of(context).translate(titleKey)),
+        title: Text(title),
         leading: IconButton(
             icon: Icon(Icons.close),
             onPressed: () {

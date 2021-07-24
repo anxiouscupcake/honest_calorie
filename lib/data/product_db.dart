@@ -26,6 +26,7 @@ class ProductDatabase {
   ProductDatabase();
 
   List<Product> _flist = [];
+  bool _isLoaded = false;
 
   /// Total count of stored products.
   int productCount() {
@@ -34,6 +35,9 @@ class ProductDatabase {
 
   /// Returns indexes of products.
   Future<List<int>> getProductsFiltered(ProductFilter filter) async {
+    if (!_isLoaded)
+      await load();
+    
     List<int> list = [];
     filter.searchQuery = filter.searchQuery.toLowerCase();
     for (int i = 0; i < _flist.length; i++) {
@@ -132,6 +136,7 @@ class ProductDatabase {
       debugPrint("DEBUG: Product database loaded in " +
           stopwatch.elapsedMilliseconds.toString() +
           "ms");
+      _isLoaded = true;
       return true;
     } catch (e) {
       debugPrint("Caught exception: " + e.toString());

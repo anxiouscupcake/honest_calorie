@@ -59,9 +59,10 @@ Future _loadData() async {
   user = new User();
   futures.add(user.load());
   journal = new JournalDatabase();
-  futures.add(journal.load());
+  //futures.add(journal.load());
   products = new ProductDatabase();
-  futures.add(products.load());
+  //futures.add(products.load());
+  
   await Future.wait(futures);
 
   loadingTime.stop();

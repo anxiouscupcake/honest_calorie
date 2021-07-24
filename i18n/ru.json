@@ -66,8 +66,8 @@
     "settings": "Настройки",
     "language": "Язык",
     "language_sub": "Выберите язык приложения",
-    "edit_product_categories": "Редактировать категории продуктов",
-    "edit_product_categories_sub": "Reorder, edit or add product categories",
+    "edit_meal_categories": "Редактировать категории журнала",
+    "edit_meal_categories_sub": "Reorder, edit or add journal categories",
     "edit_profile_data": "Редактировать профиль",
     "edit_profile_data_sub": "Set your name, age, weight and height",
 

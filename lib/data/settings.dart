@@ -30,11 +30,10 @@ class Settings {
 
   // TODO: значение должны браться в зависимости от локали
   List<String> mealCategories = [
-    "Meat",
-    "Garnishes",
-    "Fruits",
-    "Vegetables",
-    "Sweets"
+    "Breakfast",
+    "Dinner",
+    "Supper",
+    "Other"
   ];
 
   // TODO: make default value false
@@ -73,6 +72,7 @@ class Settings {
       this.debugging = settings.debugging;
       this.waterTracking = settings.waterTracking;
       this.showFeedback = settings.showFeedback;
+      debugPrint("Settings are loaded");
       return true;
     } catch (e) {
       debugPrint("Failed to read user data file. Creating empty one...");

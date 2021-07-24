@@ -15,8 +15,6 @@
 // You should have received a copy of the GNU General Public License
 // along with Honest Calorie.  If not, see <http://www.gnu.org/licenses/>.
 
-import 'dart:math';
-
 import 'package:flutter/material.dart';
 import 'package:flutter/foundation.dart';
 import 'package:intl/intl.dart';
@@ -27,9 +25,7 @@ import 'package:honest_calorie/types/product.dart';
 import 'package:honest_calorie/types/product_db_screen_arguments.dart';
 import 'package:honest_calorie/types/journal_entry.dart';
 
-import 'package:honest_calorie/types/exceptions/index_is_null.dart';
 import 'package:honest_calorie/widgets/category_selector.dart';
-import 'package:honest_calorie/types/product.dart';
 
 class JournalEntryEdit extends StatefulWidget {
   final JournalEntry? jentry;
@@ -79,7 +75,7 @@ class _JournalEntryEditState extends State<JournalEntryEdit> {
       context,
       MaterialPageRoute(
           builder: (context) => CategorySelector(
-                titleKey: "pick_category",
+                title: AppLocalizations.of(context).translate("pick_category"),
                 categoryKeys: categoryKeys,
               )),
     );
@@ -89,18 +85,6 @@ class _JournalEntryEditState extends State<JournalEntryEdit> {
       setState(() {});
     }
   }
-
-  /*
-  String _getCaloriesString(JournalEntry entry) {
-    return (entry.product.calories * entry.portions).toString() +
-        " " +
-        AppLocalizations.of(context).translate("kcal_per") +
-        " " +
-        (entry.product.servingSize * entry.portions).toString() +
-        " " +
-        entry.product.getLocalizedUnit(context);
-  }
-  */
 
   @override
   Widget build(BuildContext context) {
@@ -184,7 +168,7 @@ class _JournalEntryEditState extends State<JournalEntryEdit> {
                 TextField(
                   readOnly: true,
                   controller: TextEditingController(
-                      text: widget.jentry!.getLocalizedCategory(context)),
+                      text: widget.jentry!.category),
                   decoration: InputDecoration(
                       icon: Icon(Icons.category),
                       labelText: AppLocalizations.of(context)

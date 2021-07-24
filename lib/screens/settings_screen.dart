@@ -49,19 +49,6 @@ class SettingsScreenState extends State<SettingsScreen> {
               },
             ),
             */
-            /*
-            ListTile(
-              leading: Icon(Icons.category),
-              title: Text(AppLocalizations.of(context)
-                  .translate("edit_product_categories")),
-              subtitle: Text(AppLocalizations.of(context)
-                  .translate("edit_product_categories_sub")),
-              onTap: () => Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                      builder: (context) => CategoriesEditScreen())),
-            ),
-            */
             ListTile(
               leading: Icon(Icons.person),
               title: Text(
@@ -71,20 +58,17 @@ class SettingsScreenState extends State<SettingsScreen> {
               onTap: () => Navigator.push(context,
                   MaterialPageRoute(builder: (context) => ProfileEdit())),
             ),
-            /*
-            SwitchListTile(
-              secondary: Icon(Icons.settings),
-              title: Text("Water tracking"),
-              //subtitle: Text("Your data won't be lost after disabling this option"),
-              value: settings.waterTracking,
-              onChanged:
-                  null, /*(bool value) { TODO: remove null
-                  setState(() {
-                    settings.waterTracking = value;
-                  })
-                }*/
+            ListTile(
+              leading: Icon(Icons.category),
+              title: Text(AppLocalizations.of(context)
+                  .translate("edit_meal_categories")),
+              subtitle: Text(AppLocalizations.of(context)
+                  .translate("edit_meal_categories_sub")),
+              onTap: () => Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => CategoriesEditScreen())),
             ),
-            */
             SwitchListTile(
                 secondary: Icon(Icons.bug_report),
                 title: Text("Show feedback button"),
@@ -96,6 +80,24 @@ class SettingsScreenState extends State<SettingsScreen> {
                   });
                   settings.save();
                 }),
+            SwitchListTile(
+              secondary: Icon(Icons.settings),
+              title: Text("Water tracking"),
+              subtitle:
+                  Text("Toggles water tracking functionality"),
+              value: settings.waterTracking,
+              onChanged: null,
+            ),
+            Divider(),
+            // TODO: implement import/export
+            ListTile(
+              title: Text("Import/Export data"),
+              subtitle: Text("Import or export data from or to a file"),
+              leading: Icon(Icons.import_export),
+              onTap: () {
+                return;
+              },
+            ),
           ],
         ));
   }

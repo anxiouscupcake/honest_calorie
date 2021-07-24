@@ -23,7 +23,7 @@ class Product {
 
   // required information
   String name = "";
-  String? code;
+  String? barcode;
   String? category;
   int calories = 0; // kcal
   int servingSize = 100;
@@ -61,7 +61,7 @@ class Product {
 
     // additional information
     if (json['category'] != null) category = json["category"];
-    if (json['code'] != null) code = json["code"];
+    if (json['barcode'] != null) barcode = json["barcode"];
     if (json["notes"] != null) notes = json["notes"];
     if (json["protein"] != null) protein = json["protein"];
     if (json["fat"] != null) fat = json["fat"];
@@ -82,7 +82,7 @@ class Product {
 
         // additional information
         if (category != null) "category": category,
-        if (code != null) "code": code,
+        if (barcode != null) "barcode": barcode,
         if (notes != null) "notes": notes,
         if (protein != null) "protein": protein,
         if (fat != null) "fat": fat,
