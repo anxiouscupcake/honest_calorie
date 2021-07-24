@@ -16,7 +16,6 @@
 // along with Honest Calorie.  If not, see <http://www.gnu.org/licenses/>.
 
 import 'package:flutter/foundation.dart';
-import 'package:honest_calorie/main.dart';
 import 'package:honest_calorie/types/product.dart';
 import 'package:honest_calorie/types/product_filter.dart';
 import 'dart:convert';

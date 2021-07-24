@@ -20,7 +20,7 @@ import 'package:honest_calorie/localizations.dart';
 import 'package:honest_calorie/screens/forms/profile_edit_screen.dart';
 import 'package:honest_calorie/main.dart';
 import 'package:honest_calorie/routes.dart';
-import 'package:honest_calorie/widgets/open_url.dart';
+import 'package:honest_calorie/widgets/feedback_tile.dart';
 
 import '../types/product_db_screen_arguments.dart';
 
@@ -104,13 +104,7 @@ class AppDrawer extends StatelessWidget {
                 currentScreen = "settings";
               }),
           if (settings.showFeedback)
-            ListTile(
-              title:
-                  Text(AppLocalizations.of(context).translate("report_issue")),
-              leading: Icon(Icons.bug_report),
-              onTap: () => openURL(context,
-                  "https://github.com/utkabulka/honest_calorie/issues"),
-            ),
+            FeedbackTile(),
           Divider(),
           ListTile(
               selected: currentScreen == "about",

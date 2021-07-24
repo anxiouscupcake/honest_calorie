@@ -15,29 +15,18 @@
 // You should have received a copy of the GNU General Public License
 // along with Honest Calorie.  If not, see <http://www.gnu.org/licenses/>.
 
-import 'dart:ui';
-
 import 'package:flutter/material.dart';
-import 'package:honest_calorie/widgets/drawer.dart';
 import 'package:honest_calorie/localizations.dart';
-import 'package:honest_calorie/widgets/feedback_tile.dart';
+import 'package:honest_calorie/widgets/open_url.dart';
 
-// TODO: implement about screen
-class AboutScreen extends StatelessWidget {
-  static const String routeName = "/about";
-
+class FeedbackTile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    // тут стоит сделать экран загрузки пока настройки не загрузятся
-    return Scaffold(
-        drawer: AppDrawer(),
-        appBar: AppBar(
-          title: Text(AppLocalizations.of(context).translate("about")),
-        ),
-        body: ListView(
-          children: [
-            FeedbackTile(),
-          ],
-        ));
+    return ListTile(
+      title: Text(AppLocalizations.of(context).translate("report_issue")),
+      leading: Icon(Icons.bug_report),
+      onTap: () => openURL(
+          context, "https://github.com/utkabulka/honest_calorie/issues"),
+    );
   }
 }
