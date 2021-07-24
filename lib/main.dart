@@ -27,6 +27,7 @@ import 'package:honest_calorie/localizations.dart';
 
 // screens
 import 'package:honest_calorie/routes.dart';
+import 'package:honest_calorie/screens/about_screen.dart';
 import 'package:honest_calorie/screens/journal_screen.dart';
 import 'package:honest_calorie/screens/product_db_screen.dart';
 import 'package:honest_calorie/screens/settings_screen.dart';
@@ -90,6 +91,7 @@ class MyApp extends StatelessWidget {
         Routes.product_db: (context) => ProductDBScreen(),
         Routes.statistics: (context) => StatisticsScreen(),
         Routes.settings: (context) => SettingsScreen(),
+        Routes.about: (context) => AboutScreen()
       },
       // locales
       localizationsDelegates: [

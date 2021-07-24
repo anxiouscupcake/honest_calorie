@@ -15,6 +15,7 @@
 // You should have received a copy of the GNU General Public License
 // along with Honest Calorie.  If not, see <http://www.gnu.org/licenses/>.
 
+import 'package:honest_calorie/screens/about_screen.dart';
 import 'package:honest_calorie/screens/journal_screen.dart';
 import 'package:honest_calorie/screens/product_db_screen.dart';
 import 'package:honest_calorie/screens/statistics_screen.dart';
@@ -28,4 +29,6 @@ class Routes {
   static const String statistics = StatisticsScreen.routeName;
 
   static const String settings = SettingsScreen.routeName;
+
+  static const String about = AboutScreen.routeName;
 }

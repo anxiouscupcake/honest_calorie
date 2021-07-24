@@ -18,14 +18,15 @@
 import 'package:flutter/material.dart';
 import 'package:honest_calorie/localizations.dart';
 import 'package:honest_calorie/screens/forms/profile_edit_screen.dart';
-import 'package:url_launcher/url_launcher.dart';
+//import 'package:url_launcher/url_launcher.dart';
 import 'package:honest_calorie/main.dart';
 import 'package:honest_calorie/routes.dart';
+import 'package:honest_calorie/widgets/open_url.dart';
 
 import '../types/product_db_screen_arguments.dart';
 
 class AppDrawer extends StatelessWidget {
-  // temporary dialog
+  /*
   _launchURL(String url) async {
     if (await canLaunch(url)) {
       await launch(url);
@@ -62,6 +63,7 @@ class AppDrawer extends StatelessWidget {
           );
         });
   }
+  */
 
   @override
   Widget build(BuildContext context) {
@@ -145,7 +147,7 @@ class AppDrawer extends StatelessWidget {
               title:
                   Text(AppLocalizations.of(context).translate("report_issue")),
               leading: Icon(Icons.bug_report),
-              onTap: () => _goToURL(context,
+              onTap: () => openURL(context,
                   "https://github.com/utkabulka/honest_calorie/issues"),
             ),
           Divider(),
@@ -154,7 +156,7 @@ class AppDrawer extends StatelessWidget {
               title: Text(AppLocalizations.of(context).translate("about")),
               leading: Icon(Icons.help),
               onTap: () {
-                // TODO: implement about screen
+                Navigator.pushReplacementNamed(context, Routes.about);
                 currentScreen = "about";
               }),
         ],
