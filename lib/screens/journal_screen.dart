@@ -186,52 +186,25 @@ class JournalScreenState extends State<JournalScreen> {
                           break;
                         }
                       }
-                      if (stop)
-                        break;
+                      if (stop) break;
 
                       JournalScreenCategory newCategory =
                           new JournalScreenCategory(entry.category);
                       newCategory.entries.add(entry);
                       categories.add(newCategory);
                     }
-                    /*
-                    List<JournalEntry> breakfast = [];
-                    List<JournalEntry> dinner = [];
-                    List<JournalEntry> supper = [];
-                    List<JournalEntry> other = [];
-                    for (int index in s.data) {
-                      JournalEntry entry = journal.getEntryByIndex(index);
-                      totalCalories += entry.portions * entry.product.calories;
-                      switch (entry.category) {
-                        case "breakfast":
-                          breakfast.add(entry);
-                          break;
-                        case "dinner":
-                          dinner.add(entry);
-                          break;
-                        case "supper":
-                          supper.add(entry);
-                          break;
-                        case "other":
-                          other.add(entry);
-                          break;
-                        default:
-                          debugPrint("ERROR: Uncategorized entry found!");
-                          break;
-                    }
-                    */
                     return Expanded(
                       child: ListView(
                         children: <Widget>[
                           Center(
                               child: Text(
                             totalCalories.toString() +
-                                " " +
+                                ' ' +
                                 AppLocalizations.of(context)
                                     .translate("out_of") +
-                                " " +
+                                ' ' +
                                 settings.dailyCalorieGoal.toString() +
-                                " " +
+                                ' ' +
                                 AppLocalizations.of(context).translate("kcal"),
                             style: new TextStyle(
                               fontSize: 16,
@@ -242,7 +215,13 @@ class JournalScreenState extends State<JournalScreen> {
                           for (JournalScreenCategory category in categories)
                             Column(
                               children: <Widget>[
-                                Text(category.categoryName,
+                                Text(
+                                  category.categoryName +
+                                      ' ' +
+                                      category.getCalorieSum().toString() +
+                                      ' ' +
+                                      AppLocalizations.of(context)
+                                          .translate("kcal"),
                                   style: categoryHeaderStyle,
                                 ),
                                 Divider(),
@@ -252,22 +231,6 @@ class JournalScreenState extends State<JournalScreen> {
                         ],
                       ),
                     );
-                    /*
-                    return Column(
-                      children: <Widget>[
-                        Text(
-                          totalCalories.toString() +
-                              " " +
-                              AppLocalizations.of(context).translate("out_of") +
-                              " " +
-                              settings.dailyCalorieGoal.toString() +
-                              " " +
-                              AppLocalizations.of(context).translate("kcal"),
-                          style: new TextStyle(
-                            fontSize: 16,
-                            fontWeight: FontWeight.w400,
-                          ),
-                        ),*/
                   } else {
                     return NoData(
                       iconData: Icons.book,

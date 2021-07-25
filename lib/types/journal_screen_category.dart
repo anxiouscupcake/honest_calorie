@@ -22,4 +22,12 @@ class JournalScreenCategory {
   List<JournalEntry> entries = <JournalEntry>[];
 
   JournalScreenCategory(this.categoryName);
+
+  double getCalorieSum() {
+    double result = 0;
+    for (JournalEntry entry in entries) {
+      result += entry.portions * entry.product.calories;
+    }
+    return result;
+  }
 }
