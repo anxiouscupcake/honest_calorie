@@ -85,9 +85,6 @@ class AppDrawer extends StatelessWidget {
               }),
           ListTile(
               selected: currentScreen == "statistics",
-
-              /// TODO: remove disabler
-              enabled: false,
               title: Text(AppLocalizations.of(context).translate("statistics")),
               leading: Icon(Icons.data_usage),
               onTap: () {

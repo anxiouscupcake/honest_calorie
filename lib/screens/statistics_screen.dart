@@ -20,6 +20,7 @@ import 'package:honest_calorie/routes.dart';
 import 'package:honest_calorie/widgets/drawer.dart';
 
 import 'package:honest_calorie/main.dart';
+import 'package:honest_calorie/widgets/no_data.dart';
 
 class StatisticsScreen extends StatefulWidget {
   static const String routeName = "/statistics";
@@ -37,7 +38,13 @@ class StatisticsScreenState extends State<StatisticsScreen> {
           title: Text("Statistics"),
         ),
         body: ListView(
-          children: <Widget>[],
+          children: <Widget>[
+            // TODO: implement statistics
+            NoData(
+              iconData: Icons.error,
+              text: "Not implemented yet",
+            ),
+          ],
         ));
   }
 }
