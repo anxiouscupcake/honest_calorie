@@ -17,6 +17,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter/foundation.dart';
+import 'package:honest_calorie/widgets/meal_categories.dart';
 import 'package:intl/intl.dart';
 import 'package:honest_calorie/localizations.dart';
 import 'package:honest_calorie/main.dart';
@@ -24,8 +25,6 @@ import 'package:honest_calorie/routes.dart';
 import 'package:honest_calorie/types/product.dart';
 import 'package:honest_calorie/types/product_db_screen_arguments.dart';
 import 'package:honest_calorie/types/journal_entry.dart';
-
-import 'package:honest_calorie/widgets/category_selector.dart';
 
 class JournalEntryEdit extends StatefulWidget {
   final JournalEntry? jentry;
@@ -70,6 +69,16 @@ class _JournalEntryEditState extends State<JournalEntryEdit> {
   }
 
   _pickCategory(BuildContext context) async {
+    final picked = await Navigator.push(context,
+        MaterialPageRoute(builder: (context) => MealCategoriesScreen(
+          isEditing: true,
+        )));
+    if (picked != null) {
+      setState(() {
+        widget.jentry!.category = picked as String;
+      });
+    }
+    /*
     List<String> categoryKeys = ["breakfast", "dinner", "supper", "other"];
     final picked = await Navigator.push(
       context,
@@ -84,16 +93,11 @@ class _JournalEntryEditState extends State<JournalEntryEdit> {
       lastCategory = picked;
       setState(() {});
     }
+    */
   }
 
   @override
   Widget build(BuildContext context) {
-    /*
-    if (widget.isEditing && widget.index == null) {
-      throw new IndexIsNull();
-    }
-    */
-
     return Scaffold(
       appBar: AppBar(
         title: Text(widget.isEditing!
@@ -167,8 +171,8 @@ class _JournalEntryEditState extends State<JournalEntryEdit> {
                 ),
                 TextField(
                   readOnly: true,
-                  controller: TextEditingController(
-                      text: widget.jentry!.category),
+                  controller:
+                      TextEditingController(text: widget.jentry!.category),
                   decoration: InputDecoration(
                       icon: Icon(Icons.category),
                       labelText: AppLocalizations.of(context)

@@ -29,6 +29,7 @@ class Settings {
   bool showFeedback = true;
 
   // TODO: значение должны браться в зависимости от локали
+  // TODO: add to json file
   List<String> mealCategories = [
     "Breakfast",
     "Dinner",

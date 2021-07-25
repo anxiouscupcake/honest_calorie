@@ -16,6 +16,7 @@
 // along with Honest Calorie.  If not, see <http://www.gnu.org/licenses/>.
 
 import 'dart:ui';
+import 'package:honest_calorie/types/journal_screen_category.dart';
 import 'package:intl/intl.dart';
 import 'package:flutter/material.dart';
 import 'package:honest_calorie/main.dart';
@@ -169,7 +170,31 @@ class JournalScreenState extends State<JournalScreen> {
                 dynamic s = snapshot;
                 if (snapshot.hasData) {
                   if (s.data.length > 0) {
+                    // TODO: add other nutrition values
+                    // TODO: sort categories based on array in settings
                     double totalCalories = 0;
+                    List<JournalScreenCategory> categories =
+                        <JournalScreenCategory>[];
+                    for (int index in s.data) {
+                      bool stop = false;
+                      JournalEntry entry = journal.getEntryByIndex(index);
+                      totalCalories += entry.portions * entry.product.calories;
+                      for (JournalScreenCategory category in categories) {
+                        if (category.categoryName == entry.category) {
+                          category.entries.add(entry);
+                          stop = true;
+                          break;
+                        }
+                      }
+                      if (stop)
+                        break;
+
+                      JournalScreenCategory newCategory =
+                          new JournalScreenCategory(entry.category);
+                      newCategory.entries.add(entry);
+                      categories.add(newCategory);
+                    }
+                    /*
                     List<JournalEntry> breakfast = [];
                     List<JournalEntry> dinner = [];
                     List<JournalEntry> supper = [];
@@ -193,8 +218,8 @@ class JournalScreenState extends State<JournalScreen> {
                         default:
                           debugPrint("ERROR: Uncategorized entry found!");
                           break;
-                      }
                     }
+                    */
                     return Expanded(
                       child: ListView(
                         children: <Widget>[
@@ -214,52 +239,14 @@ class JournalScreenState extends State<JournalScreen> {
                             ),
                           )),
                           Divider(),
-                          if (breakfast.length > 0)
+                          for (JournalScreenCategory category in categories)
                             Column(
                               children: <Widget>[
-                                Text(
-                                  AppLocalizations.of(context)
-                                      .translate("breakfast"),
+                                Text(category.categoryName,
                                   style: categoryHeaderStyle,
                                 ),
                                 Divider(),
-                                _buildEntriesFromList(breakfast),
-                              ],
-                            ),
-                          if (dinner.length > 0)
-                            Column(
-                              children: <Widget>[
-                                Text(
-                                  AppLocalizations.of(context)
-                                      .translate("dinner"),
-                                  style: categoryHeaderStyle,
-                                ),
-                                Divider(),
-                                _buildEntriesFromList(dinner),
-                              ],
-                            ),
-                          if (supper.length > 0)
-                            Column(
-                              children: <Widget>[
-                                Text(
-                                  AppLocalizations.of(context)
-                                      .translate("supper"),
-                                  style: categoryHeaderStyle,
-                                ),
-                                Divider(),
-                                _buildEntriesFromList(supper),
-                              ],
-                            ),
-                          if (other.length > 0)
-                            Column(
-                              children: <Widget>[
-                                Text(
-                                  AppLocalizations.of(context)
-                                      .translate("other"),
-                                  style: categoryHeaderStyle,
-                                ),
-                                Divider(),
-                                _buildEntriesFromList(other),
+                                _buildEntriesFromList(category.entries),
                               ],
                             ),
                         ],

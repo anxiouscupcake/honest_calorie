@@ -18,24 +18,35 @@
 import 'package:flutter/material.dart';
 import 'package:honest_calorie/main.dart';
 
+// TODO: localize meal categories screen
 class MealCategoriesScreen extends StatefulWidget {
+  final bool? isEditing;
+
+  const MealCategoriesScreen({
+    @required this.isEditing,
+  });
+
   @override
   State<StatefulWidget> createState() => new _MealCategoriesState();
 }
 
 class _MealCategoriesState extends State<MealCategoriesScreen> {
-  List<String> _categories = <String>[];
-
   _editCategory(BuildContext context, int index) async {
+    late bool isEditingCategory;
+    if (index >= 0) {
+      isEditingCategory = true;
+    } else {
+      isEditingCategory = false;
+    }
+
     String input = "";
     return showDialog(
         context: context,
         barrierDismissible: true,
         builder: (context) {
           return AlertDialog(
-            title: index >= 0
-                ? Text("Edit name of the category:")
-                : Text("Add new category"),
+            title:
+                index >= 0 ? Text("Edit category:") : Text("Add new category"),
             content: new Row(
               children: <Widget>[
                 Expanded(
@@ -52,21 +63,34 @@ class _MealCategoriesState extends State<MealCategoriesScreen> {
               ],
             ),
             actions: <Widget>[
-              FlatButton(
+              if (isEditingCategory)
+                TextButton(
+                    onPressed: () {
+                      settings.mealCategories.removeAt(index);
+                      Navigator.pop(context);
+                    },
+                    child: Text(
+                      "Delete",
+                      style: TextStyle(
+                        color: Colors.red.shade900,
+                      ),
+                    )),
+              TextButton(
                   onPressed: () {
                     Navigator.pop(context);
                   },
                   child: Text("Cancel")),
-              FlatButton(
+              TextButton(
                   onPressed: () {
                     if (input != "") {
-                      if (index >= 0) {
+                      if (isEditingCategory) {
                         settings.mealCategories[index] = input;
                       } else {
                         settings.mealCategories.add(input);
                       }
                     }
                     Navigator.pop(context);
+                    settings.save();
                   },
                   child: Text("OK")),
             ],
@@ -74,17 +98,8 @@ class _MealCategoriesState extends State<MealCategoriesScreen> {
         });
   }
 
-  _updateList() {
-    _categories = [];
-    for (String category in settings.mealCategories) {
-      _categories.add(category);
-    }
-  }
-
   @override
   Widget build(BuildContext context) {
-    if (_categories == null) _updateList();
-
     return Scaffold(
       appBar: AppBar(
         title: Text("Edit categories"),
@@ -94,28 +109,31 @@ class _MealCategoriesState extends State<MealCategoriesScreen> {
             Navigator.pop(context);
           },
         ),
+        actions: [
+          IconButton(
+            icon: Icon(Icons.add),
+            onPressed: () async {
+              await _editCategory(context, -1);
+              setState(() {});
+            },
+          ),
+        ],
       ),
       body: ReorderableListView(
         onReorder: (oldIndex, newIndex) {
           setState(() {
-            String old = settings.mealCategories[oldIndex];
-            String oldCategory = _categories[oldIndex];
+            String oldCategory = settings.mealCategories[oldIndex];
             if (oldIndex > newIndex) {
               for (int i = oldIndex; i > newIndex; i--) {
                 settings.mealCategories[i] = settings.mealCategories[i - 1];
-                _categories[i] = _categories[i - 1];
               }
-              settings.mealCategories[newIndex] = old;
-              _categories[newIndex] = oldCategory;
+              settings.mealCategories[newIndex] = oldCategory;
             } else {
               for (int i = oldIndex; i < newIndex - 1; i++) {
                 settings.mealCategories[i] = settings.mealCategories[i + 1];
-                _categories[i] = _categories[i + 1];
               }
-              settings.mealCategories[newIndex - 1] = old;
-              _categories[newIndex - 1] = oldCategory;
+              settings.mealCategories[newIndex - 1] = oldCategory;
             }
-            _updateList();
           });
         },
         children: <Widget>[
@@ -125,8 +143,12 @@ class _MealCategoriesState extends State<MealCategoriesScreen> {
               leading: Icon(Icons.reorder),
               title: Text(settings.mealCategories[i]),
               onTap: () async {
-                await _editCategory(context, i);
-                setState(() {});
+                if (widget.isEditing!) {
+                  Navigator.pop(context, settings.mealCategories[i]);
+                } else {
+                  await _editCategory(context, i);
+                  setState(() {});
+                }
               },
             ),
         ],

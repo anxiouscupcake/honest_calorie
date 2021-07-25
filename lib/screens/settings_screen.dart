@@ -67,7 +67,7 @@ class SettingsScreenState extends State<SettingsScreen> {
               onTap: () => Navigator.push(
                   context,
                   MaterialPageRoute(
-                      builder: (context) => MealCategoriesScreen())),
+                      builder: (context) => MealCategoriesScreen(isEditing: false,))),
             ),
             SwitchListTile(
                 secondary: Icon(Icons.bug_report),
