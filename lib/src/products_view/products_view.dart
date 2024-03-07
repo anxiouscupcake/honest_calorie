@@ -5,6 +5,21 @@ class ProductsView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Icon(Icons.question_mark_sharp);
+    return ListView(
+      children: const [
+        ListTile(
+          title: const Text('data'),
+        ),
+        ListTile(
+          title: const Text('data'),
+        ),
+        ListTile(
+          title: const Text('data'),
+        ),
+        ListTile(
+          title: const Text('data'),
+        )
+      ],
+    );
   }
 }

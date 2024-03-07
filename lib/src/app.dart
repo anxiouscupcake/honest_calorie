@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:honest_calorie/src/day_view/day_appbar.dart';
+import 'package:honest_calorie/src/statistics_view/statistics_view.dart';
 import 'settings/settings_controller.dart';
 import 'package:honest_calorie/src/day_view/day_view.dart';
 import 'package:honest_calorie/src/products_view/products_view.dart';
@@ -19,7 +21,7 @@ class App extends StatefulWidget {
 }
 
 class AppState extends State<App> {
-  int currentPageIndex = 0;
+  int currentPageIndex = 1;
 
   @override
   Widget build(BuildContext context) {
@@ -68,7 +70,8 @@ class AppState extends State<App> {
           home: Scaffold(
             appBar: AppBar(
               title: [
-                const Text("Today"),
+                const Text('Statistics'),
+                DayAppBar(selectedDay: DateTime.now()),
                 const Text("Products"),
                 const Text("Settings"),
               ][currentPageIndex],
@@ -80,6 +83,11 @@ class AppState extends State<App> {
                 });
               },
               destinations: const <Widget>[
+                NavigationDestination(
+                  selectedIcon: Icon(Icons.line_axis),
+                  icon: Icon(Icons.line_axis_outlined),
+                  label: 'Statistics',
+                ),
                 NavigationDestination(
                   selectedIcon: Icon(Icons.home),
                   icon: Icon(Icons.home_outlined),
@@ -99,6 +107,7 @@ class AppState extends State<App> {
               selectedIndex: currentPageIndex,
             ),
             body: <Widget>[
+              const StatisticsView(),
               const DayView(),
               const ProductsView(),
               SettingsView(controller: widget.settingsController)

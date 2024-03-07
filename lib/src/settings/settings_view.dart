@@ -17,26 +17,29 @@ class SettingsView extends StatelessWidget {
   Widget build(BuildContext context) {
     return ListView(
       children: [
-        DropdownButton<ThemeMode>(
-          // Read the selected themeMode from the controller
-          value: controller.themeMode,
-          // Call the updateThemeMode method any time the user selects a theme.
-          onChanged: controller.updateThemeMode,
-          items: const [
-            DropdownMenuItem(
-              value: ThemeMode.system,
-              child: Text('System Theme'),
-            ),
-            DropdownMenuItem(
-              value: ThemeMode.light,
-              child: Text('Light Theme'),
-            ),
-            DropdownMenuItem(
-              value: ThemeMode.dark,
-              child: Text('Dark Theme'),
-            )
-          ],
-        )
+        ListTile(
+          title: const Text('Theme'),
+          trailing: DropdownButton<ThemeMode>(
+            // Read the selected themeMode from the controller
+            value: controller.themeMode,
+            // Call the updateThemeMode method any time the user selects a theme.
+            onChanged: controller.updateThemeMode,
+            items: const [
+              DropdownMenuItem(
+                value: ThemeMode.system,
+                child: Text('System Theme'),
+              ),
+              DropdownMenuItem(
+                value: ThemeMode.light,
+                child: Text('Light Theme'),
+              ),
+              DropdownMenuItem(
+                value: ThemeMode.dark,
+                child: Text('Dark Theme'),
+              )
+            ],
+          ),
+        ),
       ],
     );
   }

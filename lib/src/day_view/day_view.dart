@@ -5,6 +5,6 @@ class DayView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Icon(Icons.question_mark_sharp);
+    return Scaffold();
   }
 }
