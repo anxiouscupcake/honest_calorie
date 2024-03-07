@@ -1,29 +1,30 @@
-# README #
+# honest_calorie
 
-This README would normally document whatever steps are necessary to get your application up and running.
+A new Flutter project.
 
-### What is this repository for? ###
+## Getting Started
 
-* Quick summary
-* Version
-* [Learn Markdown](https://bitbucket.org/tutorials/markdowndemo)
+This project is a starting point for a Flutter application that follows the
+[simple app state management
+tutorial](https://flutter.dev/docs/development/data-and-backend/state-mgmt/simple).
 
-### How do I get set up? ###
+For help getting started with Flutter development, view the
+[online documentation](https://flutter.dev/docs), which offers tutorials,
+samples, guidance on mobile development, and a full API reference.
 
-* Summary of set up
-* Configuration
-* Dependencies
-* Database configuration
-* How to run tests
-* Deployment instructions
+## Assets
 
-### Contribution guidelines ###
+The `assets` directory houses images, fonts, and any other files you want to
+include with your application.
 
-* Writing tests
-* Code review
-* Other guidelines
+The `assets/images` directory contains [resolution-aware
+images](https://flutter.dev/docs/development/ui/assets-and-images#resolution-aware).
 
-### Who do I talk to? ###
+## Localization
 
-* Repo owner or admin
-* Other community or team contact
+This project generates localized messages based on arb files found in
+the `lib/src/localization` directory.
+
+To support additional languages, please visit the tutorial on
+[Internationalizing Flutter
+apps](https://flutter.dev/docs/development/accessibility-and-localization/internationalization)
