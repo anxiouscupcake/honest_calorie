@@ -70,10 +70,16 @@ class AppState extends State<App> {
           home: Scaffold(
             appBar: AppBar(
               title: [
-                const Text('Statistics'),
+                AppBar(
+                  title: const Text('Statistics'),
+                ),
                 DayAppBar(selectedDay: DateTime.now()),
-                const Text("Products"),
-                const Text("Settings"),
+                AppBar(
+                  title: const Text('Products'),
+                ),
+                AppBar(
+                  title: const Text('Settings'),
+                ),
               ][currentPageIndex],
             ),
             bottomNavigationBar: NavigationBar(

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:honest_calorie/src/extensions/date_time_extension.dart';
 
 class DayAppBar extends StatelessWidget {
   const DayAppBar({
@@ -11,7 +12,7 @@ class DayAppBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return AppBar(
-      title: const Text('data'),
+      title: Text(selectedDay.toReadableDay()),
       actions: [
         IconButton(onPressed: () {}, icon: const Icon(Icons.calendar_today))
       ],
