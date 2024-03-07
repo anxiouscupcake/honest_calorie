@@ -12,12 +12,19 @@ class BottomBar extends StatelessWidget {
         children: [
           IconButton(
               onPressed: () {
-                Navigator.pushReplacementNamed(context, DayView.routeName);
+                if (ModalRoute.of(context)!.settings.name !=
+                    DayView.routeName) {
+                  Navigator.pushReplacementNamed(context, DayView.routeName);
+                }
               },
               icon: const Icon(Icons.home_filled)),
           IconButton(
               onPressed: () {
-                Navigator.pushReplacementNamed(context, ProductsView.routeName);
+                if (ModalRoute.of(context)!.settings.name !=
+                    ProductsView.routeName) {
+                  Navigator.pushReplacementNamed(
+                      context, ProductsView.routeName);
+                }
               },
               icon: const Icon(Icons.view_list_rounded)),
           IconButton(
