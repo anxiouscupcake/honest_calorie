@@ -14,4 +14,8 @@ class SettingsService {
     // Use the shared_preferences package to persist settings locally or the
     // http package to persist settings over the network.
   }
+  Future<void> updateRelativeDates(bool relativeDates) async {
+    // Use the shared_preferences package to persist settings locally or the
+    // http package to persist settings over the network.
+  }
 }

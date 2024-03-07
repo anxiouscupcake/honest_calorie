@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:honest_calorie/src/settings/list_tile_switch.dart';
 
 import 'settings_controller.dart';
 
@@ -39,6 +40,11 @@ class SettingsView extends StatelessWidget {
               )
             ],
           ),
+        ),
+        ListTileSwitch(
+          title: const Text('Relative date'),
+          value: controller.relativeDates,
+          valueSetter: controller.updateRelativeDates,
         ),
       ],
     );
