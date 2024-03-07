@@ -1,5 +1,5 @@
 name: honest_calorie
-description: "A new Flutter project."
+description: "A free and open source calorie tracker."
 
 # Prevent accidental publishing to pub.dev.
 publish_to: 'none'
