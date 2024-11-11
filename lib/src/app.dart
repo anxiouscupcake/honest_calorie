@@ -5,7 +5,7 @@ import 'package:honest_calorie/src/journal_view/journal_appbar.dart';
 import 'package:honest_calorie/src/statistics_view/statistics_view.dart';
 import 'settings/settings_controller.dart';
 import 'package:honest_calorie/src/journal_view/journal_view.dart';
-import 'package:honest_calorie/src/products_view/products_view.dart';
+import 'package:honest_calorie/src/food_view/food_view.dart';
 import 'settings/settings_view.dart';
 
 class App extends StatefulWidget {
@@ -72,7 +72,7 @@ class AppState extends State<App> {
               title: [
                 JournalAppBar(selectedDay: DateTime.now()),
                 AppBar(
-                  title: const Text('Products'),
+                  title: const Text('Food'),
                 ),
                 AppBar(
                   title: const Text('Statistics'),
@@ -95,9 +95,9 @@ class AppState extends State<App> {
                   label: 'Journal',
                 ),
                 NavigationDestination(
-                  selectedIcon: Icon(Icons.list),
-                  icon: Icon(Icons.list_outlined),
-                  label: 'Products',
+                  selectedIcon: Icon(Icons.fastfood_rounded),
+                  icon: Icon(Icons.fastfood_outlined),
+                  label: 'Food',
                 ),
                 NavigationDestination(
                   selectedIcon: Icon(Icons.line_axis),
@@ -114,7 +114,7 @@ class AppState extends State<App> {
             ),
             body: <Widget>[
               const JournalView(),
-              const ProductsView(),
+              const FoodView(),
               const StatisticsView(),
               SettingsView(controller: widget.settingsController)
             ][currentPageIndex],
