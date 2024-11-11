@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
-import 'package:honest_calorie/src/day_view/day_appbar.dart';
+import 'package:honest_calorie/src/journal_view/journal_appbar.dart';
 import 'package:honest_calorie/src/statistics_view/statistics_view.dart';
 import 'settings/settings_controller.dart';
-import 'package:honest_calorie/src/day_view/day_view.dart';
+import 'package:honest_calorie/src/journal_view/journal_view.dart';
 import 'package:honest_calorie/src/products_view/products_view.dart';
 import 'settings/settings_view.dart';
 
@@ -21,7 +21,7 @@ class App extends StatefulWidget {
 }
 
 class AppState extends State<App> {
-  int currentPageIndex = 1;
+  int currentPageIndex = 0;
 
   @override
   Widget build(BuildContext context) {
@@ -70,12 +70,12 @@ class AppState extends State<App> {
           home: Scaffold(
             appBar: AppBar(
               title: [
-                AppBar(
-                  title: const Text('Statistics'),
-                ),
-                DayAppBar(selectedDay: DateTime.now()),
+                JournalAppBar(selectedDay: DateTime.now()),
                 AppBar(
                   title: const Text('Products'),
+                ),
+                AppBar(
+                  title: const Text('Statistics'),
                 ),
                 AppBar(
                   title: const Text('Settings'),
@@ -90,19 +90,19 @@ class AppState extends State<App> {
               },
               destinations: const <Widget>[
                 NavigationDestination(
-                  selectedIcon: Icon(Icons.line_axis),
-                  icon: Icon(Icons.line_axis_outlined),
-                  label: 'Statistics',
-                ),
-                NavigationDestination(
-                  selectedIcon: Icon(Icons.home),
-                  icon: Icon(Icons.home_outlined),
-                  label: 'Home',
+                  selectedIcon: Icon(Icons.book_rounded),
+                  icon: Icon(Icons.book_outlined),
+                  label: 'Journal',
                 ),
                 NavigationDestination(
                   selectedIcon: Icon(Icons.list),
                   icon: Icon(Icons.list_outlined),
                   label: 'Products',
+                ),
+                NavigationDestination(
+                  selectedIcon: Icon(Icons.line_axis),
+                  icon: Icon(Icons.line_axis_outlined),
+                  label: 'Statistics',
                 ),
                 NavigationDestination(
                   selectedIcon: Icon(Icons.settings),
@@ -113,9 +113,9 @@ class AppState extends State<App> {
               selectedIndex: currentPageIndex,
             ),
             body: <Widget>[
-              const StatisticsView(),
-              const DayView(),
+              const JournalView(),
               const ProductsView(),
+              const StatisticsView(),
               SettingsView(controller: widget.settingsController)
             ][currentPageIndex],
           ),
