@@ -8,7 +8,7 @@ class StatisticsView extends StatelessWidget {
     return ListView(
       children: const [
         ListTile(
-          title: const Text('Statistics will be here.'),
+          title: Text('Statistics will be here.'),
         )
       ],
     );

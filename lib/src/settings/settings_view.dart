@@ -8,11 +8,11 @@ import 'settings_controller.dart';
 /// When a user changes a setting, the SettingsController is updated and
 /// Widgets that listen to the SettingsController are rebuilt.
 class SettingsView extends StatelessWidget {
-  const SettingsView({super.key, required this.controller});
+  const SettingsView({super.key, required this.settingsController});
 
   static const routeName = '/settings';
 
-  final SettingsController controller;
+  final SettingsController settingsController;
 
   @override
   Widget build(BuildContext context) {
@@ -22,9 +22,9 @@ class SettingsView extends StatelessWidget {
           title: const Text('Theme'),
           trailing: DropdownButton<ThemeMode>(
             // Read the selected themeMode from the controller
-            value: controller.themeMode,
+            value: settingsController.themeMode,
             // Call the updateThemeMode method any time the user selects a theme.
-            onChanged: controller.updateThemeMode,
+            onChanged: settingsController.updateThemeMode,
             items: const [
               DropdownMenuItem(
                 value: ThemeMode.system,
@@ -43,8 +43,8 @@ class SettingsView extends StatelessWidget {
         ),
         ListTileSwitch(
           title: const Text('Relative date'),
-          value: controller.relativeDates,
-          valueSetter: controller.updateRelativeDates,
+          value: settingsController.relativeDates,
+          valueSetter: settingsController.updateRelativeDates,
         ),
       ],
     );

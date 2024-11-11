@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:honest_calorie/src/journal_view/journal_appbar.dart';
+import 'package:honest_calorie/src/profile_view/profile_view.dart';
 import 'package:honest_calorie/src/statistics_view/statistics_view.dart';
 import 'settings/settings_controller.dart';
 import 'package:honest_calorie/src/journal_view/journal_view.dart';
@@ -78,7 +79,7 @@ class AppState extends State<App> {
                   title: const Text('Statistics'),
                 ),
                 AppBar(
-                  title: const Text('Settings'),
+                  title: const Text('Profile'),
                 ),
               ][currentPageIndex],
             ),
@@ -105,9 +106,9 @@ class AppState extends State<App> {
                   label: 'Statistics',
                 ),
                 NavigationDestination(
-                  selectedIcon: Icon(Icons.settings),
-                  icon: Icon(Icons.settings_outlined),
-                  label: 'Settings',
+                  selectedIcon: Icon(Icons.person),
+                  icon: Icon(Icons.person_outline),
+                  label: 'Profile',
                 ),
               ],
               selectedIndex: currentPageIndex,
@@ -116,7 +117,7 @@ class AppState extends State<App> {
               const JournalView(),
               const FoodView(),
               const StatisticsView(),
-              SettingsView(controller: widget.settingsController)
+              const ProfileView(),
             ][currentPageIndex],
           ),
         );
