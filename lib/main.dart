@@ -17,6 +17,7 @@ along with this program.  If not, see <https://www.gnu.org/licenses/>. */
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:honest_calorie/src/components/settings_button.dart';
 import 'package:honest_calorie/src/models/app_settings_model.dart';
 import 'package:honest_calorie/src/models/food_model.dart';
 import 'package:honest_calorie/src/models/journal_model.dart';
@@ -106,11 +107,22 @@ class _MainPageState extends State<MainPage> {
     appSettingsModel = Provider.of<AppSettingsModel>(context);
   }
 
+  List<Widget> getAppBarActions() {
+    List<Widget> widgets = List.empty(growable: true);
+    if (currentPageIndex == 0) {
+      widgets.add(IconButton(
+          onPressed: () {}, icon: const Icon(Icons.calendar_month_rounded)));
+    }
+    widgets.add(const SettingsButton());
+    return widgets;
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: Text(pageNames[currentPageIndex]),
+        actions: getAppBarActions(),
       ),
       bottomNavigationBar: NavigationBar(
         onDestinationSelected: (int index) {
