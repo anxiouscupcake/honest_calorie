@@ -1,16 +1,18 @@
-# honest_calorie
+# Honest Calorie
 
-A new Flutter project.
+This app is work in progress for now.
 
-## Getting Started
+Free and open-source nutrition tracker.
 
-This project is a starting point for a Flutter application that follows the
-[simple app state management
-tutorial](https://flutter.dev/docs/development/data-and-backend/state-mgmt/simple).
+## Building
 
-For help getting started with Flutter development, view the
-[online documentation](https://flutter.dev/docs), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+The app is built the same way as any other flutter project.
+Although instructions will be added.
+
+Before building the app run `dart run build_runner build`.
+
+You can also start `dart run build_runner watch -d` in a separate
+terminal window to automatically generate needed code.
 
 ## Assets
 
