@@ -5,11 +5,17 @@ Full notice can be found at /lib/main.dart file. */
 
 import 'package:flutter/material.dart';
 
-class JournalView extends StatelessWidget {
-  const JournalView({super.key});
+class StatisticsPage extends StatelessWidget {
+  const StatisticsPage({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold();
+    return ListView(
+      children: const [
+        ListTile(
+          title: Text('Statistics will be here.'),
+        )
+      ],
+    );
   }
 }

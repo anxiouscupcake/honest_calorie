@@ -5,24 +5,20 @@ Full notice can be found at /lib/main.dart file. */
 
 import 'package:flutter/material.dart';
 
-class FoodView extends StatelessWidget {
-  const FoodView({super.key});
+class ProfilePage extends StatefulWidget {
+  const ProfilePage({super.key});
 
+  @override
+  State<StatefulWidget> createState() => _ProfilePageState();
+}
+
+class _ProfilePageState extends State<ProfilePage> {
   @override
   Widget build(BuildContext context) {
     return ListView(
       children: const [
         ListTile(
-          title: const Text('data'),
-        ),
-        ListTile(
-          title: const Text('data'),
-        ),
-        ListTile(
-          title: const Text('data'),
-        ),
-        ListTile(
-          title: const Text('data'),
+          title: Text("Profile data will be here."),
         )
       ],
     );
