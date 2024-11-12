@@ -130,8 +130,8 @@ class _MainPageState extends State<MainPage> {
             label: pageNames[1],
           ),
           NavigationDestination(
-            selectedIcon: const Icon(Icons.line_axis),
-            icon: const Icon(Icons.line_axis_outlined),
+            selectedIcon: const Icon(Icons.insert_chart_rounded),
+            icon: const Icon(Icons.insert_chart_outlined_rounded),
             label: pageNames[2],
           ),
           NavigationDestination(
