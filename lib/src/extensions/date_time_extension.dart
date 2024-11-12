@@ -1,3 +1,8 @@
+/* Honest Calorie, an open-source nutrition tracker
+Copyright (C) 2024 Roman Zubin
+
+Full notice can be found at /lib/main.dart file. */
+
 extension DateTimeExtension on DateTime {
   String toTimeAgo({bool numericDates = true}) {
     final difference = DateTime.now().difference(this);

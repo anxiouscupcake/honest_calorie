@@ -1,3 +1,8 @@
+/* Honest Calorie, an open-source nutrition tracker
+Copyright (C) 2024 Roman Zubin
+
+Full notice can be found at /lib/main.dart file. */
+
 import 'package:flutter/material.dart';
 import 'package:honest_calorie/src/settings/settings_controller.dart';
 

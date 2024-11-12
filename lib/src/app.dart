@@ -1,3 +1,8 @@
+/* Honest Calorie, an open-source nutrition tracker
+Copyright (C) 2024 Roman Zubin
+
+Full notice can be found at /lib/main.dart file. */
+
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
@@ -7,7 +12,6 @@ import 'package:honest_calorie/src/statistics_view/statistics_view.dart';
 import 'settings/settings_controller.dart';
 import 'package:honest_calorie/src/journal_view/journal_view.dart';
 import 'package:honest_calorie/src/food_view/food_view.dart';
-import 'settings/settings_view.dart';
 
 class App extends StatefulWidget {
   const App({
