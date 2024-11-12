@@ -17,8 +17,10 @@ along with this program.  If not, see <https://www.gnu.org/licenses/>. */
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
-import 'package:honest_calorie/src/components/journal_appbar.dart';
 import 'package:honest_calorie/src/models/app_settings_model.dart';
+import 'package:honest_calorie/src/models/food_model.dart';
+import 'package:honest_calorie/src/models/journal_model.dart';
+import 'package:honest_calorie/src/models/profile_model.dart';
 import 'package:honest_calorie/src/pages/profile_page.dart';
 import 'package:honest_calorie/src/pages/statistics_page.dart';
 import 'package:honest_calorie/src/pages/journal_page.dart';
@@ -66,7 +68,14 @@ class HonestCalorieApp extends StatelessWidget {
         darkTheme: ThemeData.dark(),
         themeMode: ThemeMode.system,
 
-        home: const MainPage(),
+        home: MultiProvider(
+          providers: [
+            Provider(create: (context) => ProfileModel()),
+            Provider(create: (context) => FoodModel()),
+            Provider(create: (context) => JournalModel()),
+          ],
+          child: const MainPage(),
+        ),
       ),
     );
   }
@@ -82,6 +91,13 @@ class MainPage extends StatefulWidget {
 class _MainPageState extends State<MainPage> {
   int currentPageIndex = 0;
 
+  static const pageNames = [
+    "Journal",
+    "Food",
+    "Statistics",
+    "Profile",
+  ];
+
   late AppSettingsModel appSettingsModel;
 
   @override
@@ -94,18 +110,7 @@ class _MainPageState extends State<MainPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: [
-          JournalAppBar(selectedDay: DateTime.now()),
-          AppBar(
-            title: const Text('Food'),
-          ),
-          AppBar(
-            title: const Text('Statistics'),
-          ),
-          AppBar(
-            title: const Text('Profile'),
-          ),
-        ][currentPageIndex],
+        title: Text(pageNames[currentPageIndex]),
       ),
       bottomNavigationBar: NavigationBar(
         onDestinationSelected: (int index) {
@@ -113,26 +118,26 @@ class _MainPageState extends State<MainPage> {
             currentPageIndex = index;
           });
         },
-        destinations: const <Widget>[
+        destinations: <Widget>[
           NavigationDestination(
-            selectedIcon: Icon(Icons.book_rounded),
-            icon: Icon(Icons.book_outlined),
-            label: 'Journal',
+            selectedIcon: const Icon(Icons.book_rounded),
+            icon: const Icon(Icons.book_outlined),
+            label: pageNames[0],
           ),
           NavigationDestination(
-            selectedIcon: Icon(Icons.fastfood_rounded),
-            icon: Icon(Icons.fastfood_outlined),
-            label: 'Food',
+            selectedIcon: const Icon(Icons.fastfood_rounded),
+            icon: const Icon(Icons.fastfood_outlined),
+            label: pageNames[1],
           ),
           NavigationDestination(
-            selectedIcon: Icon(Icons.line_axis),
-            icon: Icon(Icons.line_axis_outlined),
-            label: 'Statistics',
+            selectedIcon: const Icon(Icons.line_axis),
+            icon: const Icon(Icons.line_axis_outlined),
+            label: pageNames[2],
           ),
           NavigationDestination(
-            selectedIcon: Icon(Icons.person),
-            icon: Icon(Icons.person_outline),
-            label: 'Profile',
+            selectedIcon: const Icon(Icons.person),
+            icon: const Icon(Icons.person_outline),
+            label: pageNames[3],
           ),
         ],
         selectedIndex: currentPageIndex,
