@@ -49,11 +49,11 @@ class Profile {
   double? height;
 
   double? getBMI() {
-    if (weight == null || height == null) {
+    if (weight != null && height != null && height! > 0) {
+      return weight! / height!;
+    } else {
       return null;
     }
-    // TODO: implement BMI
-    return 0;
   }
 
   int? getAge() {
