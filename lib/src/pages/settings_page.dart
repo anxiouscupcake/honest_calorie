@@ -4,6 +4,7 @@ Copyright (C) 2024 Roman Zubin
 Full notice can be found at /lib/main.dart file. */
 
 import 'package:flutter/material.dart';
+import 'package:honest_calorie/src/components/list_tile_switch.dart';
 import 'package:provider/provider.dart';
 import 'package:honest_calorie/src/models/app_settings_model.dart';
 
@@ -33,6 +34,15 @@ class _SettingsPageState extends State<SettingsPage> {
       ),
       body: ListView(
         children: [
+          ListTile(
+              leading: const Icon(Icons.abc),
+              title: const Text("Use metric system"),
+              trailing: Switch(
+                value: appSettingsModel.useMetric,
+                onChanged: (value) => setState(
+                  () => appSettingsModel.useMetric = value,
+                ),
+              )),
           ListTile(
             leading: const Icon(Icons.info_outline),
             title: const Text("About"),
