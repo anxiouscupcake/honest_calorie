@@ -91,7 +91,35 @@ class _ProfilePageState extends State<ProfilePage> {
               leading: Icon(profile.getGenderIconData()),
               title: const Text("Gender"),
               subtitle: Text(profile.getGenderName()),
-              onTap: () {},
+              onTap: () async {
+                Gender? selectedGender = await showDialog<Gender>(
+                  context: context,
+                  builder: (context) => SimpleDialog(
+                    title: const Text("Select your gender"),
+                    children: [
+                      SimpleDialogOption(
+                        child: const Text("Female"),
+                        onPressed: () {
+                          Navigator.pop<Gender>(context, Gender.female);
+                        },
+                      ),
+                      SimpleDialogOption(
+                        child: const Text("Male"),
+                        onPressed: () {
+                          Navigator.pop<Gender>(context, Gender.male);
+                        },
+                      ),
+                      SimpleDialogOption(
+                        child: const Text("Rather not say"),
+                        onPressed: () {
+                          Navigator.pop<Gender>(context, null);
+                        },
+                      ),
+                    ],
+                  ),
+                );
+                setState(() => profile.gender = selectedGender);
+              },
             ),
           ],
         ),
