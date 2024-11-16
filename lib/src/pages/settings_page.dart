@@ -4,7 +4,6 @@ Copyright (C) 2024 Roman Zubin
 Full notice can be found at /lib/main.dart file. */
 
 import 'package:flutter/material.dart';
-import 'package:honest_calorie/src/components/list_tile_switch.dart';
 import 'package:provider/provider.dart';
 import 'package:honest_calorie/src/models/app_settings_model.dart';
 
