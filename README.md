@@ -14,6 +14,8 @@ Before building the app run `dart run build_runner build`.
 You can also start `dart run build_runner watch -d` in a separate
 terminal window to automatically generate needed code.
 
+Or, if you are on linux, you can just use the `run_code_gen.sh` script.
+
 ## Assets
 
 The `assets` directory houses images, fonts, and any other files you want to
