@@ -27,8 +27,19 @@ class _SettingsPageState extends State<SettingsPage> {
 
   @override
   Widget build(BuildContext context) {
-    return ListView(
-      children: const [],
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text("Settings"),
+      ),
+      body: ListView(
+        children: [
+          ListTile(
+            leading: const Icon(Icons.info_outline),
+            title: const Text("About"),
+            onTap: () => showAboutDialog(context: context),
+          ),
+        ],
+      ),
     );
   }
 }
