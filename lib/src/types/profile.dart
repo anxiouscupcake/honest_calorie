@@ -8,7 +8,7 @@ import 'package:json_annotation/json_annotation.dart';
 
 part 'profile.g.dart';
 
-@JsonSerializable()
+@JsonSerializable(includeIfNull: false)
 class Profile {
   String username = "You";
   DateTime? dateOfBirth;
@@ -43,7 +43,7 @@ class Profile {
     return "Unset";
   }
 
-  int calorieGoal = 2000;
+  int? calorieGoal;
 
   double? weight;
   double? height;
