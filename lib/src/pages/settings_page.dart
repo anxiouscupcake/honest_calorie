@@ -1,5 +1,5 @@
 /* Honest Calorie, an open-source nutrition tracker
-Copyright (C) 2024 Roman Zubin
+Copyright (C) 2025 Nicole Zubina
 
 Full notice can be found at /lib/main.dart file. */
 

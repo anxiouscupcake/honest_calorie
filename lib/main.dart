@@ -1,5 +1,5 @@
 /* Honest Calorie, an open-source nutrition tracker
-Copyright (C) 2024 Roman Zubin
+Copyright (C) 2025 Nicole Zubina
 
 This program is free software: you can redistribute it and/or modify
 it under the terms of the GNU General Public License as published by
