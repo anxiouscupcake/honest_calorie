@@ -10,7 +10,7 @@ part 'food.g.dart';
 @JsonSerializable(includeIfNull: false)
 class Food {
   Food();
-  Food.fromNameCalories(this.name, this.calories);
+  Food.fromName(this.name);
 
   String name = "Unnamed food";
   int calories = 0;

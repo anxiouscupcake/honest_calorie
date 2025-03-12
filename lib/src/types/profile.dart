@@ -57,9 +57,12 @@ class Profile {
   }
 
   int? getAge() {
-    if (dateOfBirth == null) return null;
-    // TODO: implement age
-    return 0;
+    if (dateOfBirth != null) {
+      final diff = DateTime.now().difference(dateOfBirth!);
+      return diff.inDays ~/ 365;
+    } else {
+      return null;
+    }
   }
 
   Profile();

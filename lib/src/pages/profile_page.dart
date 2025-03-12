@@ -88,6 +88,24 @@ class _ProfilePageState extends State<ProfilePage> {
               onTap: () {},
             ),
             ListTile(
+              leading: const Icon(Icons.cake_outlined),
+              title: const Text("Age"),
+              subtitle: Text(profile.getAge() != null
+                  ? "${profile.getAge()} years old"
+                  : "Unset"),
+              onTap: () async {
+                DateTime? birthDate = await showDatePicker(
+                    context: context,
+                    firstDate: DateTime(1900),
+                    lastDate: DateTime(3000),
+                    currentDate: profile.dateOfBirth,
+                    helpText: "Select your birth date");
+                if (birthDate != null) {
+                  setState(() => profile.dateOfBirth = birthDate);
+                }
+              },
+            ),
+            ListTile(
               leading: Icon(profile.getGenderIconData()),
               title: const Text("Gender"),
               subtitle: Text(profile.getGenderName()),

@@ -8,11 +8,16 @@ import 'package:honest_calorie/src/types/food.dart';
 class FoodModel {
   late List<Food> _presetFoods;
 
-  FoodModel() {
+  FoodModel();
+
+  Future<List<Food>> getPresetFoods() async {
+    // TODO: parse preset foods from JSON file
+
     // debug list for testing
     _presetFoods = List.empty(growable: true);
 
-    Food apple = Food.fromNameCalories("Apple", 72);
+    Food apple = Food.fromName("Apple");
+    apple.calories = 72;
     apple.protein = 0.36;
     apple.fat = 0.23;
     apple.totalCarbs = 19.06;
@@ -20,17 +25,15 @@ class FoodModel {
     apple.fiber = 3.3;
     _presetFoods.add(apple);
 
-    Food egg = Food.fromNameCalories("Egg", 74);
+    Food egg = Food.fromName("Egg");
+    egg.calories = 74;
     egg.protein = 6.29;
     egg.fat = 4.97;
     egg.totalCarbs = 0.38;
     egg.sugars = 0.38;
     egg.fiber = 0;
     _presetFoods.add(egg);
-  }
 
-  Future<List<Food>> getPresetFoods() async {
-    // TODO: parse preset foods from JSON file
     return _presetFoods;
   }
 }

@@ -1,4 +1,4 @@
-package com.example.honest_calorie
+package com.utkabulka.honestcalorie
 
 import io.flutter.embedding.android.FlutterActivity
 
