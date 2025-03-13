@@ -43,6 +43,24 @@ class _SettingsPageState extends State<SettingsPage> {
                 ),
               )),
           ListTile(
+            leading: const Icon(Icons.dark_mode),
+            title: const Text("Follow system theme"),
+            trailing: Switch(
+                value: appSettingsModel.themeFollowSystem,
+                onChanged: (value) =>
+                    setState(() => appSettingsModel.themeFollowSystem = value)),
+          ),
+          ListTile(
+            leading: const Icon(Icons.dark_mode),
+            title: const Text("Dark mode"),
+            trailing: Switch(
+                value: appSettingsModel.themeDark,
+                onChanged: appSettingsModel.themeFollowSystem
+                    ? null
+                    : (value) =>
+                        setState(() => appSettingsModel.themeDark = value)),
+          ),
+          ListTile(
             leading: const Icon(Icons.info_outline),
             title: const Text("About"),
             onTap: () => showAboutDialog(context: context),

@@ -28,55 +28,73 @@ import 'package:honest_calorie/src/pages/journal_page.dart';
 import 'package:honest_calorie/src/pages/food_page.dart';
 import 'package:provider/provider.dart';
 
-void main() async => runApp(const HonestCalorieApp());
+void main() async => runApp(const CalorieApp());
 
-class HonestCalorieApp extends StatelessWidget {
-  const HonestCalorieApp({super.key});
+class CalorieApp extends StatefulWidget {
+  const CalorieApp({super.key});
+
+  @override
+  State<StatefulWidget> createState() => _CalorieAppState();
+}
+
+class _CalorieAppState extends State<CalorieApp> {
+  late AppSettingsModel appSettingsModel;
+
+  @override
+  void initState() {
+    super.initState();
+    appSettingsModel = AppSettingsModel();
+  }
 
   @override
   Widget build(BuildContext context) {
-    return Provider(
-      create: (context) => AppSettingsModel(),
-      builder: (context, child) => MaterialApp(
-        // Providing a restorationScopeId allows the Navigator built by the
-        // MaterialApp to restore the navigation stack when a user leaves and
-        // returns to the app after it has been killed while running in the
-        // background.
-        restorationScopeId: 'app',
+    return ChangeNotifierProvider(
+      create: (_) => appSettingsModel,
+      child: Consumer<AppSettingsModel>(
+        builder: (context, value, child) {
+          return MaterialApp(
+            // Providing a restorationScopeId allows the Navigator built by the
+            // MaterialApp to restore the navigation stack when a user leaves and
+            // returns to the app after it has been killed while running in the
+            // background.
+            restorationScopeId: 'app',
 
-        // Provide the generated AppLocalizations to the MaterialApp. This
-        // allows descendant Widgets to display the correct translations
-        // depending on the user's locale.
-        localizationsDelegates: const [
-          AppLocalizations.delegate,
-          GlobalMaterialLocalizations.delegate,
-          GlobalWidgetsLocalizations.delegate,
-          GlobalCupertinoLocalizations.delegate,
-        ],
-        supportedLocales: const [
-          Locale('en', ''), // English, no country code
-        ],
+            // Provide the generated AppLocalizations to the MaterialApp. This
+            // allows descendant Widgets to display the correct translations
+            // depending on the user's locale.
+            localizationsDelegates: const [
+              AppLocalizations.delegate,
+              GlobalMaterialLocalizations.delegate,
+              GlobalWidgetsLocalizations.delegate,
+              GlobalCupertinoLocalizations.delegate,
+            ],
+            supportedLocales: const [
+              Locale('en', ''), // English, no country code
+            ],
 
-        // Use AppLocalizations to configure the correct application title
-        // depending on the user's locale.
-        //
-        // The appTitle is defined in .arb files found in the localization
-        // directory.
-        onGenerateTitle: (BuildContext context) =>
-            AppLocalizations.of(context)!.appTitle,
+            // Use AppLocalizations to configure the correct application title
+            // depending on the user's locale.
+            //
+            // The appTitle is defined in .arb files found in the localization
+            // directory.
+            onGenerateTitle: (BuildContext context) =>
+                AppLocalizations.of(context)!.appTitle,
 
-        theme: ThemeData(),
-        darkTheme: ThemeData.dark(),
-        themeMode: ThemeMode.system,
+            theme: ThemeData(),
+            darkTheme: ThemeData.dark(),
+            themeMode: value.getThemeMode(),
 
-        home: MultiProvider(
-          providers: [
-            Provider(create: (context) => ProfileModel()),
-            Provider(create: (context) => FoodModel()),
-            Provider(create: (context) => JournalModel()),
-          ],
-          child: const MainPage(),
-        ),
+            home: MultiProvider(
+              providers: [
+                Provider(create: (context) => AppSettingsModel()),
+                Provider(create: (context) => ProfileModel()),
+                Provider(create: (context) => FoodModel()),
+                Provider(create: (context) => JournalModel()),
+              ],
+              child: const MainPage(),
+            ),
+          );
+        },
       ),
     );
   }
@@ -99,19 +117,29 @@ class _MainPageState extends State<MainPage> {
     "Profile",
   ];
 
-  late AppSettingsModel appSettingsModel;
+  late JournalModel journalModel;
 
   @override
   void didChangeDependencies() {
     super.didChangeDependencies();
-    appSettingsModel = Provider.of<AppSettingsModel>(context);
+    journalModel = Provider.of(context);
   }
 
   List<Widget> getAppBarActions() {
     List<Widget> widgets = List.empty(growable: true);
     if (currentPageIndex == 0) {
       widgets.add(IconButton(
-          onPressed: () {}, icon: const Icon(Icons.calendar_month_rounded)));
+          onPressed: () async {
+            DateTime? selectedDate = await showDatePicker(
+                context: context,
+                firstDate: DateTime(1900),
+                lastDate: DateTime(3000),
+                currentDate: journalModel.selectedDate);
+            if (selectedDate != null) {
+              setState(() => journalModel.selectedDate = selectedDate);
+            }
+          },
+          icon: const Icon(Icons.calendar_month_rounded)));
     }
     widgets.add(const SettingsButton());
     return widgets;
