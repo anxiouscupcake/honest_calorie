@@ -4,6 +4,7 @@ Copyright (C) 2025 Nicole Zubina
 Full notice can be found at /lib/main.dart file. */
 
 import 'package:flutter/material.dart';
+import 'package:honest_calorie/src/common/constants.dart';
 import 'package:json_annotation/json_annotation.dart';
 
 part 'profile.g.dart';
@@ -13,14 +14,14 @@ class Profile {
   String username = "You";
   DateTime? dateOfBirth;
 
-  Gender? gender;
+  String? gender;
 
   IconData getGenderIconData() {
     if (gender != null) {
       switch (gender) {
-        case Gender.female:
+        case GENDER_FEMALE:
           return Icons.female;
-        case Gender.male:
+        case GENDER_MALE:
           return Icons.male;
         default:
           return Icons.question_mark;
@@ -32,9 +33,9 @@ class Profile {
   String getGenderName() {
     if (gender != null) {
       switch (gender) {
-        case Gender.female:
+        case GENDER_FEMALE:
           return "Female";
-        case Gender.male:
+        case GENDER_MALE:
           return "Male";
         default:
           return "Unset";
@@ -70,9 +71,4 @@ class Profile {
   factory Profile.fromJson(Map<String, dynamic> json) =>
       _$ProfileFromJson(json);
   Map<String, dynamic> toJson() => _$ProfileToJson(this);
-}
-
-enum Gender {
-  female,
-  male,
 }

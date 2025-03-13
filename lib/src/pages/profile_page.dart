@@ -3,7 +3,9 @@ Copyright (C) 2025 Nicole Zubina
 
 Full notice can be found at /lib/main.dart file. */
 
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:honest_calorie/src/common/constants.dart';
 import 'package:honest_calorie/src/models/profile_model.dart';
 import 'package:honest_calorie/src/types/profile.dart';
 import 'package:provider/provider.dart';
@@ -69,7 +71,7 @@ class _ProfilePageState extends State<ProfilePage> {
               trailing: const Icon(Icons.help_outline),
               title: const Text("Body mass index"),
               subtitle: Text(profile.getBMI() != null
-                  ? profile.getBMI().toString()
+                  ? "Your BMI is ${profile.getBMI()}"
                   : "Unknown"),
               onTap: () {},
             ),
@@ -85,7 +87,7 @@ class _ProfilePageState extends State<ProfilePage> {
               title: const Text("Height"),
               subtitle: Text(
                   profile.height != null ? profile.height.toString() : "Unset"),
-              onTap: () {},
+              onTap: () async {},
             ),
             ListTile(
               leading: const Icon(Icons.cake_outlined),
@@ -110,7 +112,7 @@ class _ProfilePageState extends State<ProfilePage> {
               title: const Text("Gender"),
               subtitle: Text(profile.getGenderName()),
               onTap: () async {
-                Gender? selectedGender = await showDialog<Gender>(
+                String? selectedGender = await showDialog<String>(
                   context: context,
                   builder: (context) => SimpleDialog(
                     title: const Text("Select your gender"),
@@ -118,19 +120,19 @@ class _ProfilePageState extends State<ProfilePage> {
                       SimpleDialogOption(
                         child: const Text("Female"),
                         onPressed: () {
-                          Navigator.pop<Gender>(context, Gender.female);
+                          Navigator.pop<String>(context, GENDER_FEMALE);
                         },
                       ),
                       SimpleDialogOption(
                         child: const Text("Male"),
                         onPressed: () {
-                          Navigator.pop<Gender>(context, Gender.male);
+                          Navigator.pop<String>(context, GENDER_MALE);
                         },
                       ),
                       SimpleDialogOption(
                         child: const Text("Rather not say"),
                         onPressed: () {
-                          Navigator.pop<Gender>(context, null);
+                          Navigator.pop<String>(context, null);
                         },
                       ),
                     ],

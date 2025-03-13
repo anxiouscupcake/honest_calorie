@@ -34,15 +34,6 @@ class _SettingsPageState extends State<SettingsPage> {
       body: ListView(
         children: [
           ListTile(
-              leading: const Icon(Icons.abc),
-              title: const Text("Use metric system"),
-              trailing: Switch(
-                value: appSettingsModel.useMetric,
-                onChanged: (value) => setState(
-                  () => appSettingsModel.useMetric = value,
-                ),
-              )),
-          ListTile(
             leading: const Icon(Icons.dark_mode),
             title: const Text("Follow system theme"),
             trailing: Switch(
@@ -60,6 +51,20 @@ class _SettingsPageState extends State<SettingsPage> {
                     : (value) =>
                         setState(() => appSettingsModel.themeDark = value)),
           ),
+          ListTile(
+              leading: const Icon(Icons.abc),
+              title: const Text("Use metric system"),
+              trailing: Switch(
+                value: appSettingsModel.useMetric,
+                onChanged: null,
+              )),
+          ListTile(
+              leading: const Icon(Icons.calendar_month_outlined),
+              title: const Text("Relative dates"),
+              trailing: Switch(
+                value: appSettingsModel.relativeDates,
+                onChanged: null,
+              )),
           ListTile(
             leading: const Icon(Icons.info_outline),
             title: const Text("About"),

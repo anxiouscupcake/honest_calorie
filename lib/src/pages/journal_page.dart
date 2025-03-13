@@ -25,6 +25,13 @@ class _JournalViewState extends State<JournalView> {
 
   @override
   Widget build(BuildContext context) {
-    return Text(journalModel.selectedDate.toIso8601String());
+    return ListView(
+      children: [
+        ListTile(
+          title: const Text('Selected date'),
+          subtitle: Text(journalModel.selectedDate.toIso8601String()),
+        )
+      ],
+    );
   }
 }
