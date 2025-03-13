@@ -82,7 +82,7 @@ class _CalorieAppState extends State<CalorieApp> {
 
             theme: ThemeData(),
             darkTheme: ThemeData.dark(),
-            themeMode: value.getThemeMode(),
+            themeMode: value.themeMode,
 
             home: MultiProvider(
               providers: [
